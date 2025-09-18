@@ -11,6 +11,7 @@
 
 
 #include "permutations.h"
+#include "stdio.h"
 
 /***************************************************/
 /* Function: random_num Date:                      */
@@ -27,7 +28,7 @@
 /***************************************************/
 int random_num(int inf, int sup)
 {
-  /* your code */
+  return rand()/(RAND_MAX+1.)*(sup-inf+1)+inf;
 }
 
 /***************************************************/
@@ -45,7 +46,24 @@ int random_num(int inf, int sup)
 /***************************************************/
 int* generate_perm(int N)
 {
-  /* your code */
+  int *perm;
+  int j, aux, dum;
+
+  perm = malloc (N*sizeof(int));
+  if (perm == NULL) return NULL;
+
+  for (j=0; j<N; j++) {
+    perm[j] = j + 1;
+  }
+
+  for (j=0; j<N; j++) {
+    aux = random_num(j+1, N-1);
+    dum = perm[j];
+    perm[j] = perm[aux];
+    perm[aux] = dum;
+  }
+
+  return perm;
 }
 
 /***************************************************/
