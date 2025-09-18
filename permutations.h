@@ -12,8 +12,6 @@
 #ifndef PERMUTATIONS_H
 #define PERMUTATIONS_H
 
-#define RAND_MAX 32767
-
 /* constants */
 
 #ifndef ERR

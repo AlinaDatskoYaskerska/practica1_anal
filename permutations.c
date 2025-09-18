@@ -12,6 +12,7 @@
 
 #include "permutations.h"
 #include "stdio.h"
+#include <stdlib.h>
 
 /***************************************************/
 /* Function: random_num Date:                      */
