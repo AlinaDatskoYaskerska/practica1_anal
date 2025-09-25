@@ -27,20 +27,20 @@ int InsertSort(int *array, int ip, int iu)
 
   /*Declaracion de variables*/
   int count = 0;
-  int i = 0, j = 0, flag = 0;
+  int i = 0, j = 0, aux = 0;
 
   /*Main codigo*/
   for (i = ip + 1; i <= iu; i++)
   {
-    flag = array[i];
+    aux = array[i];
     j = i - 1;
-    while (j >= ip && array[j] > flag)
+    while (j >= ip && array[j] > aux)
     {
       array[j + 1] = array[j];
       j = j - 1;
       count++;
     }
-    array[j + 1] = flag;
+    array[j + 1] = aux;
     count++;
   }
 
