@@ -34,11 +34,11 @@ int InsertSort(int *array, int ip, int iu)
   {
     aux = array[i];
     j = i - 1;
+    count++;
     while (j >= ip && array[j] > aux)
     {
       array[j + 1] = array[j];
       j = j - 1;
-      count++;
     }
     array[j + 1] = aux;
     count++;
