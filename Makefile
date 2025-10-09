@@ -34,7 +34,7 @@ sorting.o : sorting.c sorting.h
 	@echo "# Has changed $<"
 	$(CC) $(CFLAGS) -c $<
 
- times.o : times.c times.h
+times.o : times.c times.h
 	@echo "#---------------------------"
 	@echo "# Generating $@ "
 	@echo "# Depepends on $^"
@@ -43,21 +43,26 @@ sorting.o : sorting.c sorting.h
 	
 exercise1_test:
 	@echo Running exercise1
-	@./exercise1 -limInf 1 -limSup 5 -numN 10
+	@./exercise1 -limInf 1 -limSup 100 -numN 100000000 | sort | uniq -c > resultados.dat
+	@echo "Graficando resultados con gnuplot..."
+	@gnuplot -persist -e "set title 'Frecuencia de números'; \
+		set xlabel 'Número'; \
+		set ylabel 'Frecuencia'; \
+		plot 'resultados.dat' using 2:1 with impulses title ''"
 
 exercise2_test:
 	@echo Running exercise2
-	@./exercise2 -size 1 -numP 5
+	@./exercise2 -size 5 -numP 100
 
 exercise3_test:
 	@echo Running exercise3
-	@./exercise3 -size 1 -numP 5
+	@./exercise3 -size 5 -numP 100
 
 exercise4_test:
 	@echo Running exercise4
-	@./exercise4 -size 1
+	@./exercise4 -size 100
 
 exercise5_test:
 	@echo Running exercise5
-	@./exercise5 -num_min 1 -num_max 5 -incr 1 -numP 5 -outputFile exercise5.log
+	@./exercise5 -num_min 1 -num_max 100 -incr 1 -numP 100 -outputFile exercise5.log
 
