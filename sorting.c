@@ -73,9 +73,7 @@ int BubbleSort(int *array, int ip, int iu)
       count++;
       if (array[j] > array[j + 1])
       {
-        temp = array[j];
-        array[j] = array[j + 1];
-        array[j + 1] = temp;
+        swap(&array[j], &array[j + 1]);
         flag = 1;
       }
     }
