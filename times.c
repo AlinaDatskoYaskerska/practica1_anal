@@ -17,17 +17,12 @@
 #include <assert.h>
 #include <time.h>
 
-/***************************************************/
-/* Function: average_sorting_time Date:            */
-/*                                                 */
-/* Your documentation                              */
-/***************************************************/
 short average_sorting_time(pfunc_sort metodo,
                            int n_perms,
                            int N,
                            PTIME_AA ptime)
 {
-  int i = 0, start = 0, end = 0, temp = 0, max = 0, min = 0, ob = 0;
+  int i = 0, start = 0, end = 0, temp = 0, max, min, ob = 0;
   int **tabla;
 
   assert(metodo != NULL);
@@ -40,10 +35,15 @@ short average_sorting_time(pfunc_sort metodo,
     return ERR;
 
   start = clock();
-  for (i = 0; i < n_perms; i++)
+
+  temp = metodo(tabla[0], 0, N - 1);
+  ob = temp;
+  min = temp;
+  max = temp;
+
+  for (i = 1; i < n_perms; i++)
   {
     temp = metodo(tabla[i], 0, N - 1);
-
     ob += temp;
 
     if (temp > max)
@@ -51,6 +51,7 @@ short average_sorting_time(pfunc_sort metodo,
     if (temp < min)
       min = temp;
   }
+
   end = clock();
 
   ptime->N = N;
@@ -62,6 +63,7 @@ short average_sorting_time(pfunc_sort metodo,
 
   return OK;
 }
+
 
 /***************************************************/
 /* Function: generate_sorting_times Date:          */
@@ -88,7 +90,7 @@ short generate_sorting_times(pfunc_sort method, char *file,
   if (times == NULL) return ERR;
 
   N = num_min;
-  for (i = 0; i < n_times; i++, N += incr)
+  for (i = 0; N <= num_max; i++, N += incr)
   {
     if (average_sorting_time(method, n_perms, N, &times[i]) == ERR)
     {

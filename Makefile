@@ -43,7 +43,7 @@ times.o : times.c times.h
 	
 exercise1_test:
 	@echo Running exercise1
-	@./exercise1 -limInf 1 -limSup 100 -numN 100000000 | sort | uniq -c > resultados.dat
+	@./exercise1 -limInf 1 -limSup 100 -numN 100000 | sort | uniq -c > resultados.dat
 	@echo "Graficando resultados con gnuplot..."
 	@gnuplot -persist -e "set title 'Frecuencia de números'; \
 		set xlabel 'Número'; \
@@ -64,5 +64,5 @@ exercise4_test:
 
 exercise5_test:
 	@echo Running exercise5
-	@./exercise5 -num_min 1 -num_max 100 -incr 1 -numP 100 -outputFile exercise5.log
+	@./exercise5 -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5.log
 
