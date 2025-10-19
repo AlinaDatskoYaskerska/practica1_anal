@@ -29,19 +29,25 @@ int InsertSort(int *array, int ip, int iu)
   int count = 0;
   int i = 0, j = 0, aux = 0;
 
-  /*Main codigo*/
+  /*Main codigo:*/
   for (i = ip + 1; i <= iu; i++)
   {
     aux = array[i];
     j = i - 1;
-    while (j >= ip && array[j] > aux)
+    while (j >= ip)
     {
-      array[j + 1] = array[j];
-      j = j - 1;
-          count++;
+      count++;
+      if (array[j] > aux)
+      {
+        array[j + 1] = array[j];
+        j = j - 1;
+      }
+      else
+      {
+        break;
+      }
     }
     array[j + 1] = aux;
-    count++;
   }
 
   return count;
