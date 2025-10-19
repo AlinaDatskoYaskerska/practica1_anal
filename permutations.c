@@ -12,9 +12,13 @@
 #include "permutations.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 void swap(int *a, int *b)
 {
+  assert(a != NULL);
+  assert(b != NULL);
+
   int tmp = *a;
   *a = *b;
   *b = tmp;
@@ -36,6 +40,7 @@ void swap(int *a, int *b)
 
 int random_num(int inf, int sup)
 {
+  assert(inf <= sup);
   return rand() / (RAND_MAX + 1.) * (sup - inf + 1) + inf;
 }
 
@@ -56,6 +61,8 @@ int *generate_perm(int N)
 {
   int i = 0;
   int *perm;
+
+  assert(N > 0);
 
   perm = malloc(N * sizeof(perm[0]));
   if (perm == NULL)
@@ -92,6 +99,9 @@ int **generate_permutations(int n_perms, int N)
 {
   int i, j;
   int **perm;
+
+  assert(n_perms > 0);
+  assert(N > 0);
 
   perm = malloc(n_perms * sizeof(int *));
   if (perm == NULL)
