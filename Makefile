@@ -68,15 +68,15 @@ exercise4_test:
 
 exercise5_test_insert:
 	@echo Running exercise5 using Insert Sort
-	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
 
 exercise5_test_bubble:
 	@echo Running exercise5 using Bubble Sort
-	@./exercise5_bubble -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+	@./exercise5_bubble -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 
 exercise5_test_insert_plot_ob:
 	@echo Graficando tiempos mejor, peor y medio en OBs del Insert Sort
-	@./exercise5_insert -num_min 1 -num_max 10 -incr 1 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
 	@gnuplot -persist -e "set title 'Comparación de mejor, peor y media OBs (Insert Sort)'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Cantidad de OBs'; \
@@ -86,7 +86,7 @@ exercise5_test_insert_plot_ob:
 
 exercise5_test_insert_plot_time:
 	@echo Graficando tiempo de ejecución del Insert Sort
-	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
 	@gnuplot -persist -e "set title 'Tiempo de ejecución del Insert Sort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo de ejecución (s)'; \
@@ -94,7 +94,7 @@ exercise5_test_insert_plot_time:
 
 exercise5_test_bubble_plot_ob:
 	@echo Graficando tiempos mejor, peor y medio en OBs del Bubble Sort
-	@./exercise5_bubble -num_min 1 -num_max 10 -incr 1 -numP 100 -outputFile exercise5_bubble.log
+	@./exercise5_bubble -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 	@gnuplot -persist -e "set title 'Comparación de mejor, peor y media OBs (Bubble Sort)'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Cantidad de OBs'; \
@@ -104,7 +104,7 @@ exercise5_test_bubble_plot_ob:
 
 exercise5_test_bubble_plot_time:
 	@echo Graficando tiempo de ejecución del Bubble Sort
-	@./exercise5_bubble -num_min 1 -num_max 10 -incr 1 -numP 100 -outputFile exercise5_bubble.log
+	@./exercise5_bubble -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 	@gnuplot -persist -e "set title 'Tiempo de ejecución del Bubble Sort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo de ejecución (s)'; \
@@ -112,8 +112,8 @@ exercise5_test_bubble_plot_time:
 
 exercise5_test_comparacion_ob:
 	@echo Comparando el tiempo medio de OBs para InsertSort y BubbleSort
-	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
-	@./exercise5_bubble -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_bubble -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 	@gnuplot -persist -e "set title 'Comparación de media de OBs para Insert Sort y Bubble Sort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Cantidad de OBs'; \
@@ -122,8 +122,8 @@ exercise5_test_comparacion_ob:
 
 exercise5_test_comparacion_time:
 	@echo Comparando el tiempo de ejecución para InsertSort y BubbleSort
-	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
-	@./exercise5_bubble -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_bubble -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 	@gnuplot -persist -e "set title 'Comparación del tiempo de ejecución del Insert Sort y Bubble Sort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo (s)'; \
@@ -132,7 +132,7 @@ exercise5_test_comparacion_time:
 
 exercise5_test_insert_plot_fit_time:
 	@echo "Graficando tiempo de ejecución del Insert Sort y ajustando a función cuadrática"
-	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
 	@gnuplot -persist -e "set title 'Ajuste cuadrático del tiempo de ejecución (Insert Sort)'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo (s)'; \
@@ -143,7 +143,7 @@ exercise5_test_insert_plot_fit_time:
 
 exercise5_test_insert_plot_fit_ob:
 	@echo "Graficando y ajustando la media de OBs del Insert Sort a una función cuadrática"
-	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
 	@gnuplot -persist -e "set title 'Ajuste cuadrático de la media de OBs (Insert Sort)'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Operaciones básicas (media)'; \
@@ -154,7 +154,7 @@ exercise5_test_insert_plot_fit_ob:
 
 exercise5_test_bubble_plot_fit_time:
 	@echo "Graficando tiempo de ejecución del Bubble Sort y ajustando a función cuadrática"
-	@./exercise5_bubble -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+	@./exercise5_bubble -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 	@gnuplot -persist -e "set title 'Ajuste cuadrático del tiempo de ejecución (Bubble Sort)'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo (s)'; \
@@ -165,7 +165,7 @@ exercise5_test_bubble_plot_fit_time:
 
 exercise5_test_bubble_plot_fit_ob:
 	@echo "Graficando y ajustando la media de OBs del Bubble Sort a una función cuadrática"
-	@./exercise5_bubble -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+	@./exercise5_bubble -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 	@gnuplot -persist -e "set title 'Ajuste cuadrático de la media de OBs (Bubble Sort)'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Operaciones básicas (media)'; \
