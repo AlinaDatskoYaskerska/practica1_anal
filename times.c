@@ -9,11 +9,11 @@
  *
  */
 
-#include "stdio.h"
 #include "times.h"
 #include "sorting.h"
 #include "permutations.h"
-#include "stdlib.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 #include <time.h>
 
@@ -31,12 +31,12 @@ short average_sorting_time(pfunc_sort metodo,
   assert(ptime != NULL);
 
   tabla = generate_permutations(n_perms, N);
-  if (tabla == NULL)
-    return ERR;
+  if (tabla == NULL) return ERR;
 
   start = clock();
 
   temp = metodo(tabla[0], 0, N - 1);
+
   ob = temp;
   min = temp;
   max = temp;
@@ -56,14 +56,16 @@ short average_sorting_time(pfunc_sort metodo,
 
   ptime->N = N;
   ptime->n_elems = n_perms;
-  ptime->time = (end - start + 0.) / (CLOCKS_PER_SEC * n_perms);
-  ptime->average_ob = (ob + 0.) / n_perms;
+  ptime->time = ((double)(end - start)) / (CLOCKS_PER_SEC * n_perms);
+  ptime->average_ob = ((double)ob) / n_perms;
   ptime->min_ob = min;
   ptime->max_ob = max;
 
+  for (i = 0; i < n_perms; i++) free(tabla[i]);
+  free(tabla);
+
   return OK;
 }
-
 
 /***************************************************/
 /* Function: generate_sorting_times Date:          */
@@ -89,8 +91,7 @@ short generate_sorting_times(pfunc_sort method, char *file,
   times = (PTIME_AA)malloc(n_times * sizeof(times[0]));
   if (times == NULL) return ERR;
 
-  N = num_min;
-  for (i = 0; N <= num_max; i++, N += incr)
+  for (i = 0, N = num_min; N <= num_max; i++, N += incr)
   {
     if (average_sorting_time(method, n_perms, N, &times[i]) == ERR)
     {
