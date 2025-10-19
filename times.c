@@ -127,11 +127,11 @@ short save_time_table(char *file, PTIME_AA ptime, int n_times)
   if (fp == NULL)
     return ERR;
 
-  fprintf(fp, "N\tTime(s)\tOB_avg\tOB_max\tOB_min\n");
+  fprintf(fp, "N\t     Time(s)\t   OB_avg\t      OB_max\t  OB_min\n");
 
   for (i = 0; i < n_times; i++)
   {
-    fprintf(fp, "%d\t%.6f\t%.2f\t%d\t%d\n",
+    fprintf(fp, "%d\t   %10.6f      %-12.2f   %-7d     %-7d\n",
             ptime[i].N,
             ptime[i].time,
             ptime[i].average_ob,

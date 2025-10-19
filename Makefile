@@ -5,7 +5,7 @@
 
 CC = gcc -ansi -pedantic
 CFLAGS = -Wall
-EXE = exercise1 exercise2 exercise3 exercise4 exercise5
+EXE = exercise1 exercise2 exercise3 exercise4 exercise5_insert exercise5_bubble
 
 all : $(EXE)
 
@@ -43,7 +43,11 @@ times.o : times.c times.h
 	
 exercise1_test:
 	@echo Running exercise1
-	@./exercise1 -limInf 1 -limSup 100 -numN 100000 | sort | uniq -c > resultados.dat
+	@./exercise1 -limInf 1 -limSup 100 -numN 100000 
+
+exercise1_test_plot:
+	@echo Running exercise1
+	@./exercise1 -limInf 1 -limSup 100 -numN 100000000 | sort | uniq -c > resultados.dat
 	@echo "Graficando resultados con gnuplot..."
 	@gnuplot -persist -e "set title 'Frecuencia de números'; \
 		set xlabel 'Número'; \
@@ -62,7 +66,57 @@ exercise4_test:
 	@echo Running exercise4
 	@./exercise4 -size 100
 
-exercise5_test:
-	@echo Running exercise5
-	@./exercise5 -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5.log
+exercise5_test_insert:
+	@echo Running exercise5 using Insert Sort
+	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
+
+exercise5_test_bubble:
+	@echo Running exercise5 using Bubble Sort
+	@./exercise5_bubble -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+
+exercise5_test_insert_plot_ob:
+	@echo Graficando tiempos mejor, peor y medio en OBs del Insert Sort
+	@./exercise5_insert -num_min 1 -num_max 10 -incr 1 -numP 100 -outputFile exercise5_insert.log
+	@gnuplot -persist -e "set title 'Comparación de mejor, peor y media OBs (Insert Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Cantidad de OBs'; \
+		plot 'exercise5_insert.log' u 1:3 w lines title 'Caso medio', \
+		     'exercise5_insert.log' u 1:4 w lines title 'Peor caso', \
+		     'exercise5_insert.log' u 1:5 w lines title 'Mejor caso'"
+
+exercise5_test_insert_plot_time:
+	@echo Graficando tiempo de ejecución del Insert Sort
+	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@gnuplot -persist -e "set title 'Tiempo de ejecución del Insert Sort'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo de ejecución (s)'; \
+		plot 'exercise5_insert.log' u 1:2 w lines title 'Tiempo'"
+
+exercise5_test_bubble_plot_ob:
+	@echo Graficando tiempos mejor, peor y medio en OBs del Bubble Sort
+	@./exercise5_bubble -num_min 1 -num_max 10 -incr 1 -numP 100 -outputFile exercise5_bubble.log
+	@gnuplot -persist -e "set title 'Comparación de mejor, peor y media OBs (Bubble Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Cantidad de OBs'; \
+		plot 'exercise5_bubble.log' u 1:3 w lines title 'Caso medio', \
+		     'exercise5_bubble.log' u 1:4 w lines title 'Peor caso', \
+		     'exercise5_bubble.log' u 1:5 w lines title 'Mejor caso'"
+
+exercise5_test_bubble_plot_time:
+	@echo Graficando tiempo de ejecución del Bubble Sort
+	@./exercise5_bubble -num_min 1 -num_max 10 -incr 1 -numP 100 -outputFile exercise5_bubble.log
+	@gnuplot -persist -e "set title 'Tiempo de ejecución del Bubble Sort'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo de ejecución (s)'; \
+		plot 'exercise5_bubble.log' u 1:2 w lines title 'Tiempo'"
+
+exercise5_test_comparacion_ob:
+	@echo Comparando el tiempo medio de OBs para InsertSort y BubbleSort
+	@./exercise5_insert -num_min 1 -num_max 10 -incr 1 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_bubble -num_min 1 -num_max 10 -incr 1 -numP 100 -outputFile exercise5_bubble.log
+	@gnuplot -persist -e "set title 'Comparación de media de OBs para Insert Sort y Bubble Sort'; \
+		set xlabel 'Tamaño N'; \
+		set ylabel 'Cantidad de OBs'; \
+		plot 'exercise5_insert.log' u 1:3 w lines title 'Media del Insert Sort', \
+			 'exercise5_bubble.log' u 1:3 w lines title 'Media del Bubble Sort'"
 
