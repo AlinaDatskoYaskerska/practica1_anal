@@ -112,11 +112,65 @@ exercise5_test_bubble_plot_time:
 
 exercise5_test_comparacion_ob:
 	@echo Comparando el tiempo medio de OBs para InsertSort y BubbleSort
-	@./exercise5_insert -num_min 1 -num_max 10 -incr 1 -numP 100 -outputFile exercise5_insert.log
-	@./exercise5_bubble -num_min 1 -num_max 10 -incr 1 -numP 100 -outputFile exercise5_bubble.log
+	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_bubble -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 	@gnuplot -persist -e "set title 'Comparación de media de OBs para Insert Sort y Bubble Sort'; \
-		set xlabel 'Tamaño N'; \
+		set xlabel 'Tamaño de N'; \
 		set ylabel 'Cantidad de OBs'; \
 		plot 'exercise5_insert.log' u 1:3 w lines title 'Media del Insert Sort', \
 			 'exercise5_bubble.log' u 1:3 w lines title 'Media del Bubble Sort'"
+
+exercise5_test_comparacion_time:
+	@echo Comparando el tiempo de ejecución para InsertSort y BubbleSort
+	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_bubble -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+	@gnuplot -persist -e "set title 'Comparación del tiempo de ejecución del Insert Sort y Bubble Sort'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo (s)'; \
+		plot 'exercise5_insert.log' u 1:2 w lines title 'Tiempo del Insert Sort', \
+			 'exercise5_bubble.log' u 1:2 w lines title 'Tiempo del Bubble Sort'"
+
+exercise5_test_insert_plot_fit_time:
+	@echo "Graficando tiempo de ejecución del Insert Sort y ajustando a función cuadrática"
+	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@gnuplot -persist -e "set title 'Ajuste cuadrático del tiempo de ejecución (Insert Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo (s)'; \
+		f(x) = a*x**2 + b*x + c; \
+		fit f(x) 'exercise5_insert.log' using 1:2 via a,b,c; \
+		plot 'exercise5_insert.log' using 1:2 with lines title 'Datos experimentales', \
+		     f(x) with lines title sprintf('Ajuste cuadrático: y = %.2e*x^2 + %.2e*x + %.2e', a, b, c)"
+
+exercise5_test_insert_plot_fit_ob:
+	@echo "Graficando y ajustando la media de OBs del Insert Sort a una función cuadrática"
+	@./exercise5_insert -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@gnuplot -persist -e "set title 'Ajuste cuadrático de la media de OBs (Insert Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Operaciones básicas (media)'; \
+		f(x) = a*x**2 + b*x + c; \
+		fit f(x) 'exercise5_insert.log' using 1:3 via a,b,c; \
+		plot 'exercise5_insert.log' using 1:3 with lines title 'Datos experimentales', \
+		     f(x) with lines title sprintf('Ajuste cuadrático: y = %.2e*x^2 + %.2e*x + %.2e', a, b, c)"
+
+exercise5_test_bubble_plot_fit_time:
+	@echo "Graficando tiempo de ejecución del Bubble Sort y ajustando a función cuadrática"
+	@./exercise5_bubble -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+	@gnuplot -persist -e "set title 'Ajuste cuadrático del tiempo de ejecución (Bubble Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo (s)'; \
+		f(x) = a*x**2 + b*x + c; \
+		fit f(x) 'exercise5_bubble.log' using 1:2 via a,b,c; \
+		plot 'exercise5_bubble.log' using 1:2 with lines title 'Datos experimentales', \
+		     f(x) with lines title sprintf('Ajuste cuadrático: y = %.2e*x^2 + %.2e*x + %.2e', a, b, c)"
+
+exercise5_test_bubble_plot_fit_ob:
+	@echo "Graficando y ajustando la media de OBs del Bubble Sort a una función cuadrática"
+	@./exercise5_bubble -num_min 1 -num_max 1000 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+	@gnuplot -persist -e "set title 'Ajuste cuadrático de la media de OBs (Bubble Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Operaciones básicas (media)'; \
+		f(x) = a*x**2 + b*x + c; \
+		fit f(x) 'exercise5_bubble.log' using 1:3 via a,b,c; \
+		plot 'exercise5_bubble.log' using 1:3 with lines title 'Datos experimentales', \
+		     f(x) with lines title sprintf('Ajuste cuadrático: y = %.2e*x^2 + %.2e*x + %.2e', a, b, c)"
 
