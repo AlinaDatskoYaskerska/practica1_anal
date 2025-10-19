@@ -12,6 +12,7 @@
 #include "sorting.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 /***************************************************/
 /* Function: InsertSort    Date:                   */
@@ -19,17 +20,14 @@
 /***************************************************/
 int InsertSort(int *array, int ip, int iu)
 {
-  /*Comprobacion errores*/
-  if (array == NULL || ip < 0 || iu < 0 || ip > iu)
-  {
-    return ERR;
-  }
-
-  /*Declaracion de variables*/
   int count = 0;
   int i = 0, j = 0, aux = 0;
 
-  /*Main codigo:*/
+  assert(array != NULL);
+  assert(ip >= 0);
+  assert(iu >= 0);
+  assert(ip <= iu);
+
   for (i = ip + 1; i <= iu; i++)
   {
     aux = array[i];
@@ -59,18 +57,15 @@ int InsertSort(int *array, int ip, int iu)
 /***************************************************/
 int BubbleSort(int *array, int ip, int iu)
 {
-  /*Comprobacion errores*/
-  if (array == NULL || ip < 0 || iu < ip)
-  {
-    return ERR;
-  }
-
-  /*Declaracion de variables*/
-  int i = 0, j = 0, temp = 0;
+  int i = 0, j = 0;
   int count = 0;
   int flag = 0;
 
-  /*Main codigo*/
+  assert(array != NULL);
+  assert(ip >= 0);
+  assert(iu >= 0);
+  assert(ip <= iu);
+
   for (i = ip; i < iu; i++)
   {
     flag = 0;
@@ -90,4 +85,3 @@ int BubbleSort(int *array, int ip, int iu)
   return count;
 }
 
-/* No sé qué considerar OB, si las comparaciones o los intercambios de números => REPASAR*/
