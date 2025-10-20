@@ -15,8 +15,22 @@
 #include <assert.h>
 
 /***************************************************/
-/* Function: InsertSort    Date:                   */
-/* Your comment                                    */
+/* Function: InsertSort                            */
+/* Date: 26-09-2025                                */
+/* Authors: Lucas Manuel Blanco Rodríguez          */
+/*                                                 */
+/* Routine that sorts an array of integers         */
+/* using the Insert Sort algorithm.                */
+/*                                                 */
+/* Input:                                          */
+/* int *array: pointer to array to be sorted       */
+/* int ip: index of the first element              */
+/* int iu: index of the last element               */
+/*                                                 */
+/* Output:                                         */
+/* int: number of OBs made                         */
+/* during the sorting process                      */
+/* or ERR in case of problem                       */
 /***************************************************/
 int InsertSort(int *array, int ip, int iu)
 {
@@ -52,9 +66,24 @@ int InsertSort(int *array, int ip, int iu)
 }
 
 /***************************************************/
-/* Function: SelectSort ¿?    Date:                */
-/* Your comment                                    */
+/* Function: BubbleSort                            */
+/* Date: 26-09-2025                                */
+/* Authors: Lucas Manuel Blanco Rodríguez          */
+/*                                                 */
+/* Routine that sorts an array of integers         */
+/* using the Bubble Sort algorithm.                */
+/*                                                 */
+/* Input:                                          */
+/* int *array: pointer to  array to be sorted      */
+/* int ip: index of the first element              */
+/* int iu: index of the last element               */
+/*                                                 */
+/* Output:                                         */
+/* int: number of OBs made                         */
+/* during the sorting process                      */
+/* or ERR in case of problem                       */
 /***************************************************/
+
 int BubbleSort(int *array, int ip, int iu)
 {
   int i = 0, j = 0;

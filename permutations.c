@@ -14,6 +14,21 @@
 #include <stdlib.h>
 #include <assert.h>
 
+/***************************************************/
+/* Function: swap                                  */
+/* Date: 18-09-2025                                */
+/* Authors: Lucas Manuel Blanco Rodríguez          */
+/*                                                 */
+/* Routine that swaps the values of two integers. */
+/*                                                 */
+/* Input:                                          */
+/* int *a: pointer to the first integer            */
+/* int *b: pointer to the second integer           */
+/*                                                 */
+/* Output:                                         */
+/* void                                            */
+/***************************************************/
+
 void swap(int *a, int *b)
 {
   assert(a != NULL);
@@ -25,10 +40,12 @@ void swap(int *a, int *b)
 }
 
 /***************************************************/
-/* Function: random_num Date:                      */
-/* Authors:                                        */
+/* Function: random_num                            */
+/* Date: 18-09-2025                                */
+/* Authors:Alina Datsko Yaskerska                  */
+/*         Lucas Manuel Blanco Rodríguez           */
 /*                                                 */
-/* Rutine that generates a random number           */
+/* Routine that generates a random number           */
 /* between two given numbers                       */
 /*                                                 */
 /* Input:                                          */
@@ -45,16 +62,18 @@ int random_num(int inf, int sup)
 }
 
 /***************************************************/
-/* Function: generate_perm Date:                   */
-/* Authors:                                        */
+/* Function: generate_perm                         */
+/* Date: 18-09-2025                                */
+/* Authors: Alina Datsko Yaskerska                 */
+/*          Lucas Manuel Blanco Rodríguez          */
 /*                                                 */
-/* Rutine that generates a random permutation      */
+/* Routine that generates a random permutation      */
 /*                                                 */
 /* Input:                                          */
 /* int n: number of elements in the permutation    */
 /* Output:                                         */
 /* int *: pointer to integer array                 */
-/* that contains the permitation                   */
+/* that contains the permutation                   */
 /* or NULL in case of error                        */
 /***************************************************/
 int *generate_perm(int N)
@@ -81,8 +100,10 @@ int *generate_perm(int N)
 }
 
 /***************************************************/
-/* Function: generate_permutations Date:           */
-/* Authors:                                        */
+/* Function: generate_permutations                 */
+/* Date: 18-09-2025                                */
+/* Authors: Alina Datsko Yaskerska                 */
+/*          Lucas Manuel Blanco Rodríguez          */
 /*                                                 */
 /* Function that generates n_perms random          */
 /* permutations with N elements                    */

@@ -17,6 +17,29 @@
 #include <assert.h>
 #include <time.h>
 
+/***************************************************/
+/* Function: average_sorting_time                  */
+/* Date: 10-10-2025                                */
+/* Authors: Alina Datsko Yaskerska                 */
+/*                                                 */
+/* Routine that takes the average time and OBs     */
+/* of a sorting function                           */
+/*                                                 */
+/* Input:                                          */
+/* pfunc_sort metodo: pointer to the sorting       */
+/* function to test                                */
+/* int n_perms: number of random permutations      */
+/* int N: number of elements in each permutation   */
+/* PTIME_AA ptime: pointer to struct to store      */
+/* time statistics                                 */
+/*                                                 */
+/* Output:                                         */
+/* short: OK if successful, ERR if an error        */
+/*                                                 */
+/* The ptime struct will have: average time,       */
+/* average OBs, minimum and maximum OBs            */
+/***************************************************/
+
 short average_sorting_time(pfunc_sort metodo,
                            int n_perms,
                            int N,
@@ -68,10 +91,30 @@ short average_sorting_time(pfunc_sort metodo,
 }
 
 /***************************************************/
-/* Function: generate_sorting_times Date:          */
+/* Function: generate_sorting_times                */
+/* Date: 10-10-2025                                */
+/* Authors: Alina Datsko Yaskerska                 */
 /*                                                 */
-/* Your documentation                              */
+/* Routine that generates a table of sorting times */
+/* for a given sorting function over a range of    */
+/* array sizes and saves the results to a file.    */
+/*                                                 */
+/* Input:                                          */
+/* pfunc_sort method: pointer to the sorting       */
+/* function to test                                */
+/* char *file: name of the file to write           */
+/* int num_min: minimum array size                 */
+/* int num_max: maximum array size                 */
+/* int incr: increment of array sizes              */
+/* int n_perms: number of permutations per size    */
+/*                                                 */
+/* Output:                                         */
+/* short: OK if successful, ERR if an error        */
+/*                                                 */
+/* Writes a table with average time, OBs, min and  */
+/* max OBs for each array size to the file         */
 /***************************************************/
+
 short generate_sorting_times(pfunc_sort method, char *file,
                              int num_min, int num_max,
                              int incr, int n_perms)
@@ -111,10 +154,28 @@ short generate_sorting_times(pfunc_sort method, char *file,
 }
 
 /***************************************************/
-/* Function: save_time_table Date:                 */
+/* Function: save_time_table                       */
+/* Date: 10-10-2025                                */
+/* Authors: Alina Datsko Yaskerska                 */
+/*          Lucas Manuel balnco Rodríguez          */
 /*                                                 */
-/* Your documentation                              */
+/* Routine that saves a table of sorting times     */
+/* and OBs to a file.                              */
+/*                                                 */
+/* Input:                                          */
+/* char *file: name of the output file             */
+/* PTIME_AA ptime: pointer to array of structs     */
+/* of time and OBs                                 */
+/* int n_times: number of files of the table       */
+/*                                                 */
+/* Output:                                         */
+/* short: OK if successful, ERR if an error        */
+/*                                                 */
+/* Writes a table with headers and data for each   */
+/* array size, including average time, average OB, */
+/* maximum OB, and minimum OB                      */
 /***************************************************/
+
 short save_time_table(char *file, PTIME_AA ptime, int n_times)
 {
   FILE *fp;
