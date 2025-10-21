@@ -167,8 +167,8 @@ exercise5_test_comparacion_time_medio:
 
 exercise5_test_comparacion_time_peor:
 	@echo Comparando el tiempo de ejecución para InsertSort y BubbleSort
-	@./exercise5_insert_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
-	@./exercise5_bubble_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+	@./exercise5_insert_peor_caso -num_min 1 -num_max 400 -incr 5 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_bubble_peor_caso -num_min 1 -num_max 400 -incr 5 -numP 100 -outputFile exercise5_bubble.log
 	@gnuplot -persist -e "set title 'Comparación del tiempo peor de ejecución del Insert Sort y Bubble Sort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo (s)'; \
@@ -177,8 +177,8 @@ exercise5_test_comparacion_time_peor:
 
 exercise5_test_comparacion_time_mejor:
 	@echo Comparando el tiempo de ejecución para InsertSort y BubbleSort
-	@./exercise5_insert_mejor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
-	@./exercise5_bubble_mejor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
+	@./exercise5_insert_mejor_caso -num_min 1 -num_max 8000 -incr 12 -numP 500 -outputFile exercise5_insert.log
+	@./exercise5_bubble_mejor_caso -num_min 1 -num_max 8000 -incr 12 -numP 500 -outputFile exercise5_bubble.log
 	@gnuplot -persist -e "set title 'Comparación del tiempo mejor de ejecución del Insert Sort y Bubble Sort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo (s)'; \

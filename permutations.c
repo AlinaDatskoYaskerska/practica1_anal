@@ -31,10 +31,11 @@
 
 void swap(int *a, int *b)
 {
+  int tmp = *a;
+  
   assert(a != NULL);
   assert(b != NULL);
 
-  int tmp = *a;
   *a = *b;
   *b = tmp;
 }

@@ -79,7 +79,7 @@ short average_sorting_time(pfunc_sort metodo,
 
   ptime->N = N;
   ptime->n_elems = n_perms;
-  ptime->time = ((double)(end - start)) / (CLOCKS_PER_SEC * n_perms);
+  ptime->time = (end - start + 0.) / (CLOCKS_PER_SEC * n_perms + 0.);
   ptime->average_ob = ((double)ob) / n_perms;
   ptime->min_ob = min;
   ptime->max_ob = max;
@@ -189,11 +189,11 @@ short save_time_table(char *file, PTIME_AA ptime, int n_times)
   if (fp == NULL)
     return ERR;
 
-  fprintf(fp, "N\t     Time(s)\t   OB_avg\t      OB_max\t  OB_min\n");
+  fprintf(fp, "N         Time(s)           OB_avg          OB_max       OB_min\n");
 
   for (i = 0; i < n_times; i++)
   {
-    fprintf(fp, "%d\t   %10.6f      %-12.2f   %-7d     %-7d\n",
+    fprintf(fp, "%-10d%-18.8f%-16.2f%-13d%-16d\n",
             ptime[i].N,
             ptime[i].time,
             ptime[i].average_ob,
