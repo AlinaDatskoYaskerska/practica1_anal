@@ -67,7 +67,7 @@ exercise1_test:
 exercise1_test_plot:
 	@echo Running exercise1
 	@./exercise1 -limInf 1 -limSup 100 -numN 100000000 | sort | uniq -c > resultados.dat
-	@echo "Graficando resultados con gnuplot..."
+	@echo "Graficando resultados con gnuplot"
 	@gnuplot -persist -e "set title 'Frecuencia de números'; \
 		set xlabel 'Número'; \
 		set ylabel 'Frecuencia'; \
@@ -111,7 +111,7 @@ exercise5_test_bubble:
 
 exercise5_test_insert_plot_ob:
 	@echo Graficando tiempos mejor, peor y medio en OBs del Insert Sort
-	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
+	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 1000 -outputFile exercise5_insert.log
 	@gnuplot -persist -e "set title 'Comparación de mejor, peor y media OBs (Insert Sort)'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Cantidad de OBs'; \
@@ -228,4 +228,20 @@ exercise5_test_bubble_plot_fit_ob:
 		fit f(x) 'exercise5_bubble.log' using 1:3 via a,b,c; \
 		plot 'exercise5_bubble.log' using 1:3 with lines title 'Datos experimentales', \
 		     f(x) with lines title sprintf('Ajuste cuadrático: y = %.2e*x^2 + %.2e*x + %.2e', a, b, c)"
+
+
+runv:
+	@echo ">>>>>> Running exercise1 with Valgrind"
+	valgrind --leak-check=full ./exercise1 -limInf 1 -limSup 100 -numN 100
+	@echo ">>>>>> Running exercise2 with Valgrind"
+	valgrind --leak-check=full --track-origins=yes ./exercise2 -size 5 -numP 10
+	@echo ">>>>>> Running exercise3 with Valgrind"
+	valgrind --leak-check=full ./exercise3 -size 5 -numP 10
+	@echo ">>>>>> Running exercise4 with Valgrind"
+	valgrind --leak-check=full ./exercise4 -size 100
+	@echo ">>>>>> Running exercise5_insert with Valgrind"
+	valgrind --leak-check=full ./exercise5_insert -num_min 100 -num_max 500 -incr 50 -numP 10 -outputFile exercise5_insert.log
+	@echo ">>>>>> Running exercise5_bubble with Valgrind"
+	valgrind --leak-check=full ./exercise5_bubble -num_min 100 -num_max 500 -incr 50 -numP 10 -outputFile exercise5_bubble.log
+
 
