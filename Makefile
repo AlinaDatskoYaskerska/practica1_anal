@@ -230,18 +230,20 @@ exercise5_test_bubble_plot_fit_ob:
 		     f(x) with lines title sprintf('Ajuste cuadrático: y = %.2e*x^2 + %.2e*x + %.2e', a, b, c)"
 
 
+
 runv:
-	@echo ">>>>>> Running exercise1 with Valgrind"
-	valgrind --leak-check=full ./exercise1 -limInf 1 -limSup 100 -numN 100
-	@echo ">>>>>> Running exercise2 with Valgrind"
-	valgrind --leak-check=full --track-origins=yes ./exercise2 -size 5 -numP 10
-	@echo ">>>>>> Running exercise3 with Valgrind"
-	valgrind --leak-check=full ./exercise3 -size 5 -numP 10
-	@echo ">>>>>> Running exercise4 with Valgrind"
-	valgrind --leak-check=full ./exercise4 -size 100
-	@echo ">>>>>> Running exercise5_insert with Valgrind"
-	valgrind --leak-check=full ./exercise5_insert -num_min 100 -num_max 500 -incr 50 -numP 10 -outputFile exercise5_insert.log
-	@echo ">>>>>> Running exercise5_bubble with Valgrind"
-	valgrind --leak-check=full ./exercise5_bubble -num_min 100 -num_max 500 -incr 50 -numP 10 -outputFile exercise5_bubble.log
+	@echo ">>>>>> Running exercise1 with Valgrind (modo estricto)"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exercise1 -limInf 1 -limSup 100 -numN 100
+	@echo ">>>>>> Running exercise2 with Valgrind (modo estricto)"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exercise2 -size 5 -numP 10
+	@echo ">>>>>> Running exercise3 with Valgrind (modo estricto)"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exercise3 -size 5 -numP 10
+	@echo ">>>>>> Running exercise4 with Valgrind (modo estricto)"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exercise4 -size 100
+	@echo ">>>>>> Running exercise5_insert with Valgrind (modo estricto)"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exercise5_insert -num_min 100 -num_max 500 -incr 50 -numP 10 -outputFile test_insert.log
+	@echo ">>>>>> Running exercise5_bubble with Valgrind (modo estricto)"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exercise5_bubble -num_min 100 -num_max 500 -incr 50 -numP 10 -outputFile test_bubble.log
+
 
 
