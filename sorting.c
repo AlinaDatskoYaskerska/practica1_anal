@@ -139,7 +139,35 @@ int mergesort(int* tabla, int ip, int iu) {
   assert(iu >= 0);
   assert(ip <= iu);
 
+  int imedio, count = 0, OBs;
+  int *opc_izq = NULL, *opc_der = NULL, *opc_ord = NULL;
 
+
+  if (ip >= iu){
+    return 0;
+  }
+
+  imedio = (ip + iu) / 2;
+
+  OBs = mergesort(tabla, ip, imedio);
+  if (OBs == ERR) {
+    return ERR;
+  }
+  count += OBs;
+
+  OBs = mergesort(tabla, imedio + 1, iu);
+  if (OBs == ERR) {
+    return ERR;
+  }
+  count += OBs;
+
+  OBs = merge(tabla, ip, iu, imedio);
+  if (OBs == ERR) {
+    return ERR;
+  }
+  count += OBs;
+
+  return count;
 }
 
 
@@ -149,6 +177,41 @@ int merge(int* tabla, int ip, int iu, int imedio) {
   assert(iu >= 0);
   assert(imedio >= 0);
 
-  
+  int tamano = iu - ip + 1;
+  int *aux = NULL;
+  int i = ip, j = imedio + 1, k = 0, count = 0;
+
+  aux = (int*)malloc(tamano * sizeof(int));
+  if (aux == NULL) {
+    return ERR;
+  }
+
+  while (i <= imedio && j <= iu) {
+    if (tabla[i] < tabla[j]) {
+      aux[k] = tabla[i];
+    } else {
+      aux[k] = tabla[j];
+    }
+    k++;
+  }
+
+  while (i <= imedio) {
+    aux[k] = tabla[i];
+    k++;
+    i++;
+  }
+
+  while (j <= iu) {
+    aux[k] = tabla[j];
+    k++;
+    j++;
+  }
+
+  for (i = ip, k = 0; i <= iu; i++, k++) {
+    tabla[i] = aux[k];
+  }
+
+  free(aux);
+  return count;
 }
 
