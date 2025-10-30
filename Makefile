@@ -62,11 +62,11 @@ times_peor_caso.o : times_peor_caso.c times.h
 	
 exercise1_test:
 	@echo Running exercise1
-	@./exercise1 -limInf 1 -limSup 100 -numN 100000 
+	@./exercise1 -limInf 1 -limSup 5 -numN 500
 
 exercise1_test_plot:
 	@echo Running exercise1
-	@./exercise1 -limInf 1 -limSup 100 -numN 100000000 | sort | uniq -c > resultados.dat
+	@./exercise1 -limInf 1 -limSup 5 -numN 500 | sort | uniq -c > resultados.dat
 	@echo "Graficando resultados con gnuplot"
 	@gnuplot -persist -e "set title 'Frecuencia de números'; \
 		set xlabel 'Número'; \

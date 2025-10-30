@@ -114,3 +114,41 @@ int BubbleSort(int *array, int ip, int iu)
   return count;
 }
 
+
+/***************************************************/
+/* Function: BubbleSort     CAMBIAR                       */
+/* Date: 26-09-2025                                */
+/* Authors: Lucas Manuel Blanco Rodríguez          */
+/*                                                 */
+/* Routine that sorts an array of integers         */
+/* using the Bubble Sort algorithm.                */
+/*                                                 */
+/* Input:                                          */
+/* int *array: pointer to  array to be sorted      */
+/* int ip: index of the first element              */
+/* int iu: index of the last element               */
+/*                                                 */
+/* Output:                                         */
+/* int: number of OBs made                         */
+/* during the sorting process                      */
+/* or ERR in case of problem                       */
+/***************************************************/
+int mergesort(int* tabla, int ip, int iu) {
+  assert(tabla != NULL);
+  assert(ip >= 0);
+  assert(iu >= 0);
+  assert(ip <= iu);
+
+
+}
+
+
+int merge(int* tabla, int ip, int iu, int imedio) {
+  assert(tabla != NULL);
+  assert(ip >= 0);
+  assert(iu >= 0);
+  assert(imedio >= 0);
+
+  
+}
+
