@@ -175,6 +175,18 @@ exercise5_test_merge_plot_time:
 		set ylabel 'Tiempo de ejecución (s)'; \
 		plot 'exercise5_merge.log' u 1:2 w lines title 'Tiempo'"
 
+exercise5_test_merge_plot_time_comparacion:
+	@echo Graficando tiempo de ejecución del Merge Sort en el caso peor, mejor y medio
+	@./exercise5_merge -num_min 100 -num_max 5000 -incr 10 -numP 100 -outputFile exercise5_merge.log
+	@./exercise5_merge_peor_caso -num_min 100 -num_max 5000 -incr 10 -numP 100 -outputFile exercise5_merge_peor.log
+	@./exercise5_merge_mejor_caso -num_min 100 -num_max 5000 -incr 10 -numP 100 -outputFile exercise5_merge_mejor.log
+	@gnuplot -persist -e "set title 'Tiempo de ejecución del Merge Sort'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo de ejecución (s)'; \
+		plot 'exercise5_merge.log' u 1:2 w lines title 'Tiempo medio', \
+		     'exercise5_merge_peor.log' u 1:2 w lines title 'Tiempo peor', \
+		     'exercise5_merge_mejor.log' u 1:2 w lines title 'Tiempo mejor'"
+
 exercise5_test_comparacion_ob:
 	@echo Comparando el tiempo medio de OBs para InsertSort, BubbleSort y MergeSort
 	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
