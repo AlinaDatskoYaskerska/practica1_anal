@@ -18,25 +18,29 @@
 #include <time.h>
 
 void peor_merge(int *a, int n, int *aux) {
+
+  int i=0, mid=0, k=0;
+
+  assert(a != NULL);
+  assert(aux != NULL);
+
     if (n <= 1){
         return;
     }
 
-    int k = 0;
-
-    for (int i = 0; i < n; i += 2){
+    for (i = 0; i < n; i += 2){
       aux[k++] = a[i];
     }
 
-    for (int i = 1; i < n; i += 2){
+    for (i = 1; i < n; i += 2){
       aux[k++] = a[i];
     }
 
-    for (int i = 0; i < n; i++){
+    for (i = 0; i < n; i++){
       a[i] = aux[i];
     }
 
-    int mid = (n + 1) / 2;
+    mid = (n + 1) / 2;
 
     peor_merge(a, mid, aux);
     peor_merge(a + mid, n - mid, aux);   
@@ -70,7 +74,8 @@ short average_sorting_time(pfunc_sort metodo,
                            int N,
                            PTIME_AA ptime)
 {
-  int i = 0, j = 0, start = 0, end = 0, temp = 0, max, min, ob = 0, aux[N];
+  int i = 0, j = 0, start = 0, end = 0, temp = 0, max, min, ob = 0;
+  int *aux;
   int **tabla;
 
   assert(metodo != NULL);
@@ -78,8 +83,13 @@ short average_sorting_time(pfunc_sort metodo,
   assert(N > 0);
   assert(ptime != NULL);
 
+  aux = (int *)malloc(N * sizeof(int));
+  if (aux == NULL) return ERR;
   tabla = generate_permutations(n_perms, N);
-  if (tabla == NULL) return ERR;
+  if (tabla == NULL){
+    free(aux);
+    return ERR;
+  }
 
   if(metodo == BubbleSort || metodo == InsertSort){
     for (i = 0; i < n_perms; i++) {
@@ -128,6 +138,7 @@ short average_sorting_time(pfunc_sort metodo,
 
   for (i = 0; i < n_perms; i++) free(tabla[i]);
   free(tabla);
+  free(aux);
 
   return OK;
 }

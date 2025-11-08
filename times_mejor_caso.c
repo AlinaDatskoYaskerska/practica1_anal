@@ -56,8 +56,6 @@ short average_sorting_time(pfunc_sort metodo,
   tabla = generate_permutations(n_perms, N);
   if (tabla == NULL) return ERR;
 
-  /*Crea la tabla usando generate_permutations pero luego
-    la ordenamos indice por indice de forma ascendente*/
   if(metodo == BubbleSort || metodo == InsertSort){
     for (i = 0; i < n_perms; i++) {
       for (j = 0; j < N; j++) {
