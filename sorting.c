@@ -203,3 +203,80 @@ int merge(int* tabla, int ip, int iu, int imedio) {
   free(aux);
   return ob;
 }
+
+int quicksort(int* tabla, int ip, int iu){
+  int count = 0;
+  assert(tabla != NULL);
+  assert(ip >= 0);
+  assert(iu >= 0);
+  assert(ip <= iu);
+
+
+
+}
+
+int partition(int* tabla, int ip, int iu,int *pos){
+  int count = 0;
+  assert(tabla != NULL);
+  assert(ip >= 0);
+  assert(iu >= 0);
+  assert(ip <= iu);
+  assert(pos != NULL);
+
+  count++;
+
+  if(ip==iu){
+    *pos=ip;
+  }
+
+  return count;
+}
+
+int median(int *tabla, int ip, int iu,int *pos){
+  assert(tabla != NULL);
+  assert(ip >= 0);
+  assert(iu >= 0);
+  assert(ip <= iu);
+  assert(pos != NULL);
+
+  *pos = ip;
+
+  return 0;
+
+}
+
+int median_avg(int *tabla, int ip, int iu, int *pos){
+  assert(tabla != NULL);
+  assert(ip >= 0);
+  assert(iu >= 0);
+  assert(ip <= iu);
+  assert(pos != NULL);
+
+  *pos = (ip + iu) / 2;
+  return 0;
+
+}
+
+int median_stat(int *tabla, int ip, int iu, int *pos){
+
+  int imedio = (ip + iu) / 2;
+  assert(tabla != NULL);
+  assert(ip >= 0);
+  assert(iu >= 0);
+  assert(ip <= iu);
+  assert(pos != NULL);
+
+  if ((tabla[ip] <= tabla[imedio] && tabla[imedio] <= tabla[iu]) ||
+    (tabla[iu] <= tabla[imedio] && tabla[imedio] <= tabla[ip])) {
+    *pos = imedio;
+}
+else if ((tabla[imedio] <= tabla[ip] && tabla[ip] <= tabla[iu]) ||
+         (tabla[iu] <= tabla[ip] && tabla[ip] <= tabla[imedio])) {
+    *pos = ip;
+}
+else {
+    *pos = iu;
+}
+
+  return 0;
+ }
