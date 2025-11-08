@@ -17,6 +17,31 @@
 #include <assert.h>
 #include <time.h>
 
+void peor_merge(int *a, int n, int *aux) {
+    if (n <= 1){
+        return;
+    }
+
+    int k = 0;
+
+    for (int i = 0; i < n; i += 2){
+      aux[k++] = a[i];
+    }
+
+    for (int i = 1; i < n; i += 2){
+      aux[k++] = a[i];
+    }
+
+    for (int i = 0; i < n; i++){
+      a[i] = aux[i];
+    }
+
+    int mid = (n + 1) / 2;
+
+    peor_merge(a, mid, aux);
+    peor_merge(a + mid, n - mid, aux);   
+}
+
 /***************************************************/
 /* Function: average_sorting_time                  */
 /* Date: 10-10-2025                                */
@@ -45,7 +70,7 @@ short average_sorting_time(pfunc_sort metodo,
                            int N,
                            PTIME_AA ptime)
 {
-  int i = 0, j = 0, start = 0, end = 0, temp = 0, max, min, ob = 0;
+  int i = 0, j = 0, start = 0, end = 0, temp = 0, max, min, ob = 0, aux[N];
   int **tabla;
 
   assert(metodo != NULL);
@@ -56,11 +81,20 @@ short average_sorting_time(pfunc_sort metodo,
   tabla = generate_permutations(n_perms, N);
   if (tabla == NULL) return ERR;
 
-  /*Crea la tabla usando generate_permutations pero luego
-    la ordenamos indice por indice de forma descendente*/
-  for (i = 0; i < n_perms; i++) {
-    for (j = 0; j < N; j++) {
-      tabla[i][j] = N - j;
+  if(metodo == BubbleSort || metodo == InsertSort){
+    for (i = 0; i < n_perms; i++) {
+      for (j = 0; j < N; j++) {
+        tabla[i][j] = N - j;
+      }
+    }
+  }
+
+  if (metodo == mergesort){
+    for (i = 0; i < n_perms; i++) {
+      for (j = 0; j < N; j++){
+        tabla[i][j] = j + 1;
+      }
+      peor_merge(tabla[i], N, aux);
     }
   }
 

@@ -58,9 +58,19 @@ short average_sorting_time(pfunc_sort metodo,
 
   /*Crea la tabla usando generate_permutations pero luego
     la ordenamos indice por indice de forma ascendente*/
-  for (i = 0; i < n_perms; i++) {
-    for (j = 0; j < N; j++) {
-      tabla[i][j] = j + 1;
+  if(metodo == BubbleSort || metodo == InsertSort){
+    for (i = 0; i < n_perms; i++) {
+      for (j = 0; j < N; j++) {
+        tabla[i][j] = j + 1;
+      }
+    }
+  }
+
+  if (metodo == mergesort){
+    for (i = 0; i < n_perms; i++) {
+      for (j = 0; j < N; j++) {
+        tabla[i][j] = N - j;
+      }
     }
   }
 
