@@ -223,6 +223,7 @@ exercise5_test_merge_plot_time_comparacion:
 		     'exercise5_merge_peor.log' u 1:2 w lines title 'Tiempo peor', \
 		     'exercise5_merge_mejor.log' u 1:2 w lines title 'Tiempo mejor'"
 
+
 exercise5_test_quick_plot_time_comparacion:
 	@echo Graficando tiempo de ejecución del Quick Sort en el caso peor, mejor y medio
 	@./exercise5_quick -num_min 100 -num_max 5000 -incr 10 -numP 100 -outputFile exercise5_quick.log
@@ -249,6 +250,16 @@ exercise5_test_comparacion_ob:
 			 'exercise5_merge.log' u 1:3 w lines title 'Media del Merge Sort', \
 			 'exercise5_quick.log' u 1:3 w lines title 'Media del Quick Sort'"
 
+exercise5_test_comparacion_ob_nlogn:
+	@echo Comparando el tiempo medio de OBs para MergeSort y QuickSort
+	@./exercise5_merge -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_merge.log
+	@./exercise5_quick -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Comparación de media de OBs para Merge Sort y Quick Sort'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Cantidad de OBs'; \
+		plot 'exercise5_merge.log' u 1:3 w lines title 'Media del Merge Sort', \
+			 'exercise5_quick.log' u 1:3 w lines title 'Media del Quick Sort'"
+
 exercise5_test_comparacion_time_medio:
 	@echo Comparando el tiempo de ejecución para InsertSort, BubbleSort, MergeSort y QuickSort
 	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
@@ -261,6 +272,16 @@ exercise5_test_comparacion_time_medio:
 		plot 'exercise5_insert.log' u 1:2 w lines title 'Tiempo del Insert Sort', \
 			 'exercise5_bubble.log' u 1:2 w lines title 'Tiempo del Bubble Sort', \
 			 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort', \
+			 'exercise5_quick.log' u 1:2 w lines title 'Tiempo del Quick Sort'"
+
+exercise5_test_comparacion_time_medio_nlogn:
+	@echo Comparando el tiempo de ejecución para MergeSort y QuickSort
+	@./exercise5_merge -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_merge.log
+	@./exercise5_quick -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Comparación del tiempo de ejecución del MergeSort y QuickSort'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo (s)'; \
+		plot 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort', \
 			 'exercise5_quick.log' u 1:2 w lines title 'Tiempo del Quick Sort'"
 
 exercise5_test_comparacion_time_peor:
@@ -277,6 +298,16 @@ exercise5_test_comparacion_time_peor:
 			 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort', \
 			 'exercise5_quick.log' u 1:2 w lines title 'Tiempo del Quick Sort'"
 
+exercise5_test_comparacion_time_peor_nlogn:
+	@echo Comparando el tiempo de ejecución para MergeSort y QuickSort
+	@./exercise5_merge_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_merge.log
+	@./exercise5_quick_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Comparación del tiempo peor de ejecución del MergeSort y QuickSort'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo (s)'; \
+		plot 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort', \
+			 'exercise5_quick.log' u 1:2 w lines title 'Tiempo del Quick Sort'"
+
 exercise5_test_comparacion_time_mejor:
 	@echo Comparando el tiempo de ejecución para InsertSort, BubbleSort, MergeSort y QuickSort
 	@./exercise5_insert_mejor_caso -num_min 1 -num_max 20000 -incr 12 -numP 50 -outputFile exercise5_insert.log
@@ -289,6 +320,17 @@ exercise5_test_comparacion_time_mejor:
 		plot 'exercise5_insert.log' u 1:2 w lines title 'Tiempo del Insert Sort', \
 			 'exercise5_bubble.log' u 1:2 w lines title 'Tiempo del Bubble Sort', \
 			 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort', \
+			 'exercise5_quick.log' u 1:2 w lines title 'Tiempo del Quick Sort'"
+
+# IMPORTANTE - ESTE NO VA - IMPORTANTE#
+exercise5_test_comparacion_time_mejor_nlogn:
+	@echo Comparando el tiempo de ejecución para MergeSort y QuickSort
+	@./exercise5_merge_mejor_caso -num_min 1 -num_max 20000 -incr 12 -numP 50 -outputFile exercise5_merge.log
+	@./exercise5_quick_mejor_caso -num_min 1 -num_max 20000 -incr 12 -numP 50 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Comparación del tiempo mejor de ejecución del MergeSort y QuickSort'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo (s)'; \
+		plot 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort', \
 			 'exercise5_quick.log' u 1:2 w lines title 'Tiempo del Quick Sort'"
 
 #----------------------- Exercise 5 plots fitting -----------------------#
@@ -354,5 +396,7 @@ runv:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exercise5_bubble -num_min 100 -num_max 500 -incr 50 -numP 10 -outputFile test_bubble.log
 	@echo ">>>>>> Running exercise5_merge with Valgrind (modo estricto)"
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exercise5_merge -num_min 100 -num_max 500 -incr 50 -numP 10 -outputFile test_merge.log
+		@echo ">>>>>> Running exercise5_quick with Valgrind (modo estricto)"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exercise5_quick -num_min 100 -num_max 500 -incr 50 -numP 10 -outputFile test_quick.log
 
 

@@ -23,9 +23,8 @@ int build_best(int *a, int l, int r, int *aux, int pos)
 
   assert(a != NULL);
   assert(aux != NULL);
-  assert(l <= r);
   assert(pos >= 0);
-  
+
   if (l > r)
     return pos;
 
