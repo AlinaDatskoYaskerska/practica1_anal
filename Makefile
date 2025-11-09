@@ -13,13 +13,13 @@ all : $(EXE)
 clean :
 	rm -f *.o core $(EXE)
 
-exercise5_insert exercise5_bubble exercise5_merge : % : %.o sorting.o times.o permutations.o
+exercise5_insert exercise5_bubble exercise5_merge exercise5_quick : % : %.o sorting.o times.o permutations.o
 	$(CC) $(CFLAGS) -o $@ $@.o sorting.o times.o permutations.o
 
-exercise5_insert_mejor_caso exercise5_bubble_mejor_caso exercise5_merge_mejor_caso : % : %.o sorting.o times_mejor_caso.o permutations.o
+exercise5_insert_mejor_caso exercise5_bubble_mejor_caso exercise5_merge_mejor_caso exercise5_quick_mejor_caso : % : %.o sorting.o times_mejor_caso.o permutations.o
 	$(CC) $(CFLAGS) -o $@ $@.o sorting.o times_mejor_caso.o permutations.o
 
-exercise5_insert_peor_caso exercise5_bubble_peor_caso exercise5_merge_peor_caso : % : %.o sorting.o times_peor_caso.o permutations.o
+exercise5_insert_peor_caso exercise5_bubble_peor_caso exercise5_merge_peor_caso exercise5_quick_peor_caso : % : %.o sorting.o times_peor_caso.o permutations.o
 	$(CC) $(CFLAGS) -o $@ $@.o sorting.o times_peor_caso.o permutations.o
 
 exercise1 exercise2 exercise3 exercise4 : % : %.o sorting.o times.o permutations.o
@@ -59,7 +59,8 @@ times_peor_caso.o : times_peor_caso.c times.h
 	@echo "# Depepends on $^"
 	@echo "# Has changed $<"
 	$(CC) $(CFLAGS) -c $<
-	
+
+#----------------------- Exercise 1 - 4 tests -----------------------#
 exercise1_test:
 	@echo Running exercise1
 	@./exercise1 -limInf 1 -limSup 5 -numN 500
@@ -84,7 +85,7 @@ exercise3_test:
 exercise4_test:
 	@echo Running exercise4
 	@./exercise4 -size 100
-
+#----------------------- Exercise 5 tests best case -----------------------#
 exercise5_test_insert_mejor_caso:
 	@echo Running exercise5 using Insert Sort
 	@./exercise5_insert_mejor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
@@ -97,6 +98,11 @@ exercise5_test_merge_mejor_caso:
 	@echo Running exercise5 using Merge Sort
 	@./exercise5_merge_mejor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_merge.log
 
+exercise5_test_quick_mejor_caso:
+	@echo Running exercise5 using Quick Sort
+	@./exercise5_quick_mejor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+
+#----------------------- Exercise 5 tests worst case -----------------------#
 exercise5_test_insert_peor_caso:
 	@echo Running exercise5 using Insert Sort
 	@./exercise5_insert_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
@@ -109,6 +115,11 @@ exercise5_test_merge_peor_caso:
 	@echo Running exercise5 using Merge Sort
 	@./exercise5_merge_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_merge.log
 
+exercise5_test_quick_peor_caso:
+	@echo Running exercise5 using Quick Sort
+	@./exercise5_quick_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+
+#----------------------- Exercise 5 tests average case -----------------------#
 exercise5_test_insert:
 	@echo Running exercise5 using Insert Sort
 	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
@@ -121,6 +132,11 @@ exercise5_test_bubble:
 	@echo Running exercise5 using Bubble Sort
 	@./exercise5_bubble -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 
+exercise5_test_quick:
+	@echo Running exercise5 using Quick Sort
+	@./exercise5_quick -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+
+#----------------------- Exercise 5 plots -----------------------#
 exercise5_test_insert_plot_ob:
 	@echo Graficando tiempos mejor, peor y medio en OBs del Insert Sort
 	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 1000 -outputFile exercise5_insert.log
@@ -157,6 +173,24 @@ exercise5_test_bubble_plot_time:
 		set ylabel 'Tiempo de ejecución (s)'; \
 		plot 'exercise5_bubble.log' u 1:2 w lines title 'Tiempo'"
 
+exercise5_test_quick_plot_ob:
+	@echo Graficando tiempos mejor, peor y medio en OBs del Quick Sort
+	@./exercise5_quick -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Comparación de mejor, peor y media OBs (Quick Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Cantidad de OBs'; \
+		plot 'exercise5_quick.log' u 1:3 w lines title 'Caso medio', \
+		     'exercise5_quick.log' u 1:4 w lines title 'Peor caso', \
+		     'exercise5_quick.log' u 1:5 w lines title 'Mejor caso'"
+
+exercise5_test_quick_plot_time:
+	@echo Graficando tiempo de ejecución del Quick Sort
+	@./exercise5_quick -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Tiempo de ejecución del Quick Sort'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo de ejecución (s)'; \
+		plot 'exercise5_quick.log' u 1:2 w lines title 'Tiempo'"
+
 exercise5_test_merge_plot_ob:
 	@echo Graficando tiempos mejor, peor y medio en OBs del Merge Sort
 	@./exercise5_merge -num_min 100 -num_max 1500 -incr 10 -numP 1000 -outputFile exercise5_merge.log
@@ -175,6 +209,8 @@ exercise5_test_merge_plot_time:
 		set ylabel 'Tiempo de ejecución (s)'; \
 		plot 'exercise5_merge.log' u 1:2 w lines title 'Tiempo'"
 
+#----------------------- Exercise 5 plots comparison -----------------------#
+
 exercise5_test_merge_plot_time_comparacion:
 	@echo Graficando tiempo de ejecución del Merge Sort en el caso peor, mejor y medio
 	@./exercise5_merge -num_min 100 -num_max 5000 -incr 10 -numP 100 -outputFile exercise5_merge.log
@@ -187,53 +223,75 @@ exercise5_test_merge_plot_time_comparacion:
 		     'exercise5_merge_peor.log' u 1:2 w lines title 'Tiempo peor', \
 		     'exercise5_merge_mejor.log' u 1:2 w lines title 'Tiempo mejor'"
 
+exercise5_test_quick_plot_time_comparacion:
+	@echo Graficando tiempo de ejecución del Quick Sort en el caso peor, mejor y medio
+	@./exercise5_quick -num_min 100 -num_max 5000 -incr 10 -numP 100 -outputFile exercise5_quick.log
+	@./exercise5_quick_peor_caso -num_min 100 -num_max 5000 -incr 10 -numP 100 -outputFile exercise5_quick_peor.log
+	@./exercise5_quick_mejor_caso -num_min 100 -num_max 5000 -incr 10 -numP 100 -outputFile exercise5_quick_mejor.log
+	@gnuplot -persist -e "set title 'Tiempo de ejecución del Quick Sort'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo de ejecución (s)'; \
+		plot 'exercise5_quick.log' u 1:2 w lines title 'Tiempo medio', \
+		     'exercise5_quick_peor.log' u 1:2 w lines title 'Tiempo peor', \
+		     'exercise5_quick_mejor.log' u 1:2 w lines title 'Tiempo mejor'"
+
 exercise5_test_comparacion_ob:
-	@echo Comparando el tiempo medio de OBs para InsertSort, BubbleSort y MergeSort
+	@echo Comparando el tiempo medio de OBs para InsertSort, BubbleSort, MergeSort y QuickSort
 	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
 	@./exercise5_bubble -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 	@./exercise5_merge -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_merge.log
-	@gnuplot -persist -e "set title 'Comparación de media de OBs para Insert Sort, Bubble Sort y Merge Sort'; \
+	@./exercise5_quick -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Comparación de media de OBs para Insert Sort, Bubble Sort, Merge Sort y Quick Sort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Cantidad de OBs'; \
 		plot 'exercise5_insert.log' u 1:3 w lines title 'Media del Insert Sort', \
 			 'exercise5_bubble.log' u 1:3 w lines title 'Media del Bubble Sort', \
-			 'exercise5_merge.log' u 1:3 w lines title 'Media del Merge Sort'"
+			 'exercise5_merge.log' u 1:3 w lines title 'Media del Merge Sort', \
+			 'exercise5_quick.log' u 1:3 w lines title 'Media del Quick Sort'"
 
 exercise5_test_comparacion_time_medio:
-	@echo Comparando el tiempo de ejecución para InsertSort, BubbleSort y MergeSort
+	@echo Comparando el tiempo de ejecución para InsertSort, BubbleSort, MergeSort y QuickSort
 	@./exercise5_insert -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
 	@./exercise5_bubble -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 	@./exercise5_merge -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_merge.log
-	@gnuplot -persist -e "set title 'Comparación del tiempo de ejecución del InsertSort, BubbleSort y MergeSort'; \
+	@./exercise5_quick -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Comparación del tiempo de ejecución del InsertSort, BubbleSort, MergeSort y QuickSort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo (s)'; \
 		plot 'exercise5_insert.log' u 1:2 w lines title 'Tiempo del Insert Sort', \
 			 'exercise5_bubble.log' u 1:2 w lines title 'Tiempo del Bubble Sort', \
-			 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort'"
+			 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort', \
+			 'exercise5_quick.log' u 1:2 w lines title 'Tiempo del Quick Sort'"
 
 exercise5_test_comparacion_time_peor:
-	@echo Comparando el tiempo de ejecución para InsertSort, BubbleSort y MergeSort
+	@echo Comparando el tiempo de ejecución para InsertSort, BubbleSort, MergeSort y QuickSort
 	@./exercise5_insert_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_insert.log
 	@./exercise5_bubble_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_bubble.log
 	@./exercise5_merge_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_merge.log
-	@gnuplot -persist -e "set title 'Comparación del tiempo peor de ejecución del InsertSort, BubbleSort y MergeSort'; \
+	@./exercise5_quick_peor_caso -num_min 100 -num_max 1500 -incr 10 -numP 100 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Comparación del tiempo peor de ejecución del InsertSort, BubbleSort, MergeSort y QuickSort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo (s)'; \
 		plot 'exercise5_insert.log' u 1:2 w lines title 'Tiempo del Insert Sort', \
 			 'exercise5_bubble.log' u 1:2 w lines title 'Tiempo del Bubble Sort', \
-			 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort'"
+			 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort', \
+			 'exercise5_quick.log' u 1:2 w lines title 'Tiempo del Quick Sort'"
 
 exercise5_test_comparacion_time_mejor:
-	@echo Comparando el tiempo de ejecución para InsertSort, BubbleSort y MergeSort
+	@echo Comparando el tiempo de ejecución para InsertSort, BubbleSort, MergeSort y QuickSort
 	@./exercise5_insert_mejor_caso -num_min 1 -num_max 20000 -incr 12 -numP 50 -outputFile exercise5_insert.log
 	@./exercise5_bubble_mejor_caso -num_min 1 -num_max 20000 -incr 12 -numP 50 -outputFile exercise5_bubble.log
 	@./exercise5_merge_mejor_caso -num_min 1 -num_max 20000 -incr 12 -numP 50 -outputFile exercise5_merge.log
-	@gnuplot -persist -e "set title 'Comparación del tiempo mejor de ejecución del InsertSort, BubbleSort y MergeSort'; \
+	@./exercise5_quick_mejor_caso -num_min 1 -num_max 20000 -incr 12 -numP 50 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Comparación del tiempo mejor de ejecución del InsertSort, BubbleSort, MergeSort y QuickSort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo (s)'; \
 		plot 'exercise5_insert.log' u 1:2 w lines title 'Tiempo del Insert Sort', \
 			 'exercise5_bubble.log' u 1:2 w lines title 'Tiempo del Bubble Sort', \
-			 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort'"
+			 'exercise5_merge.log' u 1:2 w lines title 'Tiempo del Merge Sort', \
+			 'exercise5_quick.log' u 1:2 w lines title 'Tiempo del Quick Sort'"
+
+#----------------------- Exercise 5 plots fitting -----------------------#
 
 exercise5_test_insert_plot_fit_time:
 	@echo "Graficando tiempo de ejecución del Insert Sort y ajustando a función cuadrática"

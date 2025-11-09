@@ -204,79 +204,149 @@ int merge(int* tabla, int ip, int iu, int imedio) {
   return ob;
 }
 
-int quicksort(int* tabla, int ip, int iu){
-  int count = 0;
-  assert(tabla != NULL);
-  assert(ip >= 0);
-  assert(iu >= 0);
-  assert(ip <= iu);
+int quicksort(int *tabla, int ip, int iu)
+{
+	int ob_total = 0;
+	int ob_partir = 0, ob_izquierda = 0, ob_derecha = 0;
+	int pos = 0;
 
+	assert(tabla != NULL);
+	assert(ip >= 0);
+	assert(iu >= 0);
+	assert(ip <= iu);
 
+	if (ip >= iu)
+		return 0;
 
+	ob_partir = partition(tabla, ip, iu, &pos);
+	if (ob_partir == ERR)
+		return ERR;
+	ob_total += ob_partir;
+
+	if (pos - 1 >= ip)
+	{
+		ob_izquierda = quicksort(tabla, ip, pos - 1);
+		if (ob_izquierda == ERR)
+			return ERR;
+		ob_total += ob_izquierda;
+	}
+
+	if (pos + 1 <= iu)
+	{
+		ob_derecha = quicksort(tabla, pos + 1, iu);
+		if (ob_derecha == ERR)
+			return ERR;
+		ob_total += ob_derecha;
+	}
+
+	return ob_total;
 }
 
-int partition(int* tabla, int ip, int iu,int *pos){
-  int count = 0;
-  assert(tabla != NULL);
-  assert(ip >= 0);
-  assert(iu >= 0);
-  assert(ip <= iu);
-  assert(pos != NULL);
+int partition(int *tabla, int ip, int iu, int *pos)
+{
+	int ob = 0;
+	int ob_piv = 0;
+	int pivot_val, i, j, tmp;
 
-  count++;
+	assert(tabla != NULL);
+	assert(ip >= 0);
+	assert(iu >= 0);
+	assert(ip <= iu);
+	assert(pos != NULL);
 
-  if(ip==iu){
-    *pos=ip;
-  }
+	if (ip == iu)
+	{
+		*pos = ip;
+		return 0;
+	}
 
-  return count;
+	ob_piv = median(tabla, ip, iu, pos);
+	if (ob_piv == ERR)
+		return ERR;
+	ob += ob_piv;
+
+	if (*pos != ip)
+	{
+		tmp = tabla[ip];
+		tabla[ip] = tabla[*pos];
+		tabla[*pos] = tmp;
+	}
+
+	pivot_val = tabla[ip];
+	i = ip + 1;
+
+	for (j = ip + 1; j <= iu; j++)
+	{
+		ob++;
+		if (tabla[j] < pivot_val)
+		{
+			tmp = tabla[i];
+			tabla[i] = tabla[j];
+			tabla[j] = tmp;
+			i++;
+		}
+	}
+
+	*pos = i - 1;
+
+	tmp = tabla[ip];
+	tabla[ip] = tabla[*pos];
+	tabla[*pos] = tmp;
+
+	return ob;
 }
 
-int median(int *tabla, int ip, int iu,int *pos){
-  assert(tabla != NULL);
-  assert(ip >= 0);
-  assert(iu >= 0);
-  assert(ip <= iu);
-  assert(pos != NULL);
+int median(int *tabla, int ip, int iu, int *pos)
+{
+	assert(tabla != NULL);
+	assert(ip >= 0);
+	assert(iu >= 0);
+	assert(ip <= iu);
+	assert(pos != NULL);
 
-  *pos = ip;
+	*pos = ip;
 
-  return 0;
-
+	return 0;
 }
 
-int median_avg(int *tabla, int ip, int iu, int *pos){
-  assert(tabla != NULL);
-  assert(ip >= 0);
-  assert(iu >= 0);
-  assert(ip <= iu);
-  assert(pos != NULL);
+int median_avg(int *tabla, int ip, int iu, int *pos)
+{
+	assert(tabla != NULL);
+	assert(ip >= 0);
+	assert(iu >= 0);
+	assert(ip <= iu);
+	assert(pos != NULL);
 
-  *pos = (ip + iu) / 2;
-  return 0;
-
+	*pos = (ip + iu) / 2;
+	return 0;
 }
 
-int median_stat(int *tabla, int ip, int iu, int *pos){
+int median_stat(int *tabla, int ip, int iu, int *pos)
+{
 
-  int imedio = (ip + iu) / 2;
-  assert(tabla != NULL);
-  assert(ip >= 0);
-  assert(iu >= 0);
-  assert(ip <= iu);
-  assert(pos != NULL);
+	int imedio = (ip + iu) / 2;
+	assert(tabla != NULL);
+	assert(ip >= 0);
+	assert(iu >= 0);
+	assert(ip <= iu);
+	assert(pos != NULL);
 
-  if ((tabla[ip] <= tabla[imedio] && tabla[imedio] <= tabla[iu]) ||
-    (tabla[iu] <= tabla[imedio] && tabla[imedio] <= tabla[ip])) {
-    *pos = imedio;
-}
-else if ((tabla[imedio] <= tabla[ip] && tabla[ip] <= tabla[iu]) ||
-         (tabla[iu] <= tabla[ip] && tabla[ip] <= tabla[imedio])) {
-    *pos = ip;
-}
-else {
-    *pos = iu;
-}
+	/*Esto se podria hacer en menos seguro*/
+	if ((tabla[ip] <= tabla[imedio] && tabla[imedio] <= tabla[iu]) ||
+			(tabla[iu] <= tabla[imedio] && tabla[imedio] <= tabla[ip]))
+	{
+		*pos = imedio;
+	}
+	else if ((tabla[imedio] <= tabla[ip] && tabla[ip] <= tabla[iu]) ||
+					 (tabla[iu] <= tabla[ip] && tabla[ip] <= tabla[imedio]))
+	{
+		*pos = ip;
+	}
+	else
+	{
+		*pos = iu;
+	}
 
-  return 0;
- }
+	/*Aqui habria que devolver el numero de OBs*/
+	return 0;
+}

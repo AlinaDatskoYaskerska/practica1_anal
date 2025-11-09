@@ -17,6 +17,32 @@
 #include <assert.h>
 #include <time.h>
 
+void best_quick_perm(int *a, int n, int *aux)
+{
+  int mid, k, i;
+
+  assert(a != NULL);
+  assert(aux != NULL);
+  assert(n >= 0);
+
+  if (n <= 1)
+    return;
+
+  mid = (n - 1) / 2;
+  k = 0;
+
+  aux[k++] = a[mid];
+
+  best_quick_perm(a, mid, aux + k);
+  k += mid;
+
+  best_quick_perm(a + mid + 1, n - mid - 1, aux + k);
+  k += (n - mid - 1);
+
+  for (i = 0; i < n; i++)
+    a[i] = aux[i];
+}
+
 /***************************************************/
 /* Function: average_sorting_time                  */
 /* Date: 10-10-2025                                */
@@ -47,6 +73,7 @@ short average_sorting_time(pfunc_sort metodo,
 {
   int i = 0, j = 0, start = 0, end = 0, temp = 0, max, min, ob = 0;
   int **tabla;
+  int *aux;
 
   assert(metodo != NULL);
   assert(n_perms > 0);
@@ -70,6 +97,32 @@ short average_sorting_time(pfunc_sort metodo,
         tabla[i][j] = N - j;
       }
     }
+  }
+
+  if (metodo == quicksort)
+  {
+    aux = (int *)malloc(N * sizeof(int));
+    if (aux == NULL)
+    {
+      for (i = 0; i < n_perms; i++)
+      {
+        free(tabla[i]);
+      }
+      free(tabla);
+      return ERR;
+    }
+
+    for (i = 0; i < n_perms; i++)
+    {
+      for (j = 0; j < N; j++)
+      {
+        tabla[i][j] = j + 1;
+      }
+
+      best_quick_perm(tabla[i], N, aux);
+    }
+
+    free(aux);
   }
 
   start = clock();

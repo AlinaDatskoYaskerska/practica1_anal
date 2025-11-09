@@ -4,7 +4,7 @@
 /*                                                         */
 /* Programa that writes in a file                          */
 /* the average times of the algorithm                      */
-/* of sorting by insertion                                 */
+/* of sorting by merge sort                                */
 /*                                                         */
 /* Input: Command Line                                     */
 /* -num_min: lowest number of table elements               */

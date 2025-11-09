@@ -91,7 +91,7 @@ short average_sorting_time(pfunc_sort metodo,
     return ERR;
   }
 
-  if(metodo == BubbleSort || metodo == InsertSort){
+  if(metodo == BubbleSort || metodo == InsertSort || metodo == quicksort){
     for (i = 0; i < n_perms; i++) {
       for (j = 0; j < N; j++) {
         tabla[i][j] = N - j;

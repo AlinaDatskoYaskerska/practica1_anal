@@ -29,6 +29,11 @@ int BubbleSort(int* array, int ip, int iu);
 int InsertSort(int* array, int ip, int iu);
 int mergesort(int* tabla, int ip, int iu);
 int merge(int* tabla, int ip, int iu, int imedio);
+int quicksort(int *tabla, int ip, int iu);
+int partition(int *tabla, int ip, int iu, int *pos);
+int median(int *tabla, int ip, int iu, int *pos);
+int median_avg(int *tabla, int ip, int iu, int *pos);
+int median_stat(int *tabla, int ip, int iu, int *pos);
 
 
 #endif

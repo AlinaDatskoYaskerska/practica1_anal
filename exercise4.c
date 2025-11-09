@@ -49,10 +49,10 @@ int main(int argc, char** argv)
     exit(-1);
   }
 
-  ret =mergesort(perm, 0, tamano-1);
+  ret = quicksort(perm, 0, tamano-1);
 
   if (ret == ERR) {
-    printf("Error: Error in BubbleSort\n");
+    printf("Error: Error in QuickSort\n");
     free(perm);
     exit(-1);
   }
