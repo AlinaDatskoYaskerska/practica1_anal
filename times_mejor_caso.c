@@ -17,30 +17,52 @@
 #include <assert.h>
 #include <time.h>
 
+int build_best(int *a, int l, int r, int *aux, int pos)
+{
+  int i, mid, left_start, left_len, first;
+
+  assert(a != NULL);
+  assert(aux != NULL);
+  assert(l <= r);
+  assert(pos >= 0);
+  
+  if (l > r)
+    return pos;
+
+  mid = (l + r) / 2;
+
+  aux[pos++] = a[mid];
+
+  left_start = pos;
+  pos = build_best(a, l, mid - 1, aux, pos);
+  left_len = pos - left_start;
+
+  if (left_len > 1)
+  {
+    first = aux[left_start];
+    for (i = left_start; i < left_start + left_len - 1; i++)
+      aux[i] = aux[i + 1];
+    aux[left_start + left_len - 1] = first;
+  }
+
+  pos = build_best(a, mid + 1, r, aux, pos);
+
+  return pos;
+}
+
 void best_quick_perm(int *a, int n, int *aux)
 {
-  int mid, k, i;
+  int i = 0;
 
   assert(a != NULL);
   assert(aux != NULL);
   assert(n >= 0);
 
-  if (n <= 1)
-    return;
-
-  mid = (n - 1) / 2;
-  k = 0;
-
-  aux[k++] = a[mid];
-
-  best_quick_perm(a, mid, aux + k);
-  k += mid;
-
-  best_quick_perm(a + mid + 1, n - mid - 1, aux + k);
-  k += (n - mid - 1);
-
+  build_best(a, 0, n - 1, aux, 0);
   for (i = 0; i < n; i++)
+  {
     a[i] = aux[i];
+  }
 }
 
 /***************************************************/

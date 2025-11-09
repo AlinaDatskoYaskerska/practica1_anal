@@ -331,7 +331,7 @@ int median_stat(int *tabla, int ip, int iu, int *pos)
 	assert(ip <= iu);
 	assert(pos != NULL);
 
-	/*Esto se podria hacer en menos seguro*/
+
 	if ((tabla[ip] <= tabla[imedio] && tabla[imedio] <= tabla[iu]) ||
 			(tabla[iu] <= tabla[imedio] && tabla[imedio] <= tabla[ip]))
 	{

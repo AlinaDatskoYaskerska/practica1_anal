@@ -5,7 +5,7 @@
 
 CC = gcc -ansi -pedantic
 CFLAGS = -Wall
-EXE = exercise1 exercise2 exercise3 exercise4 exercise5_insert exercise5_bubble exercise5_insert_mejor_caso exercise5_bubble_mejor_caso exercise5_insert_peor_caso exercise5_bubble_peor_caso exercise5_merge exercise5_merge_mejor_caso exercise5_merge_peor_caso
+EXE = exercise1 exercise2 exercise3 exercise4 exercise5_insert exercise5_bubble exercise5_insert_mejor_caso exercise5_bubble_mejor_caso exercise5_insert_peor_caso exercise5_bubble_peor_caso exercise5_merge exercise5_merge_mejor_caso exercise5_merge_peor_caso exercise5_quick exercise5_quick_mejor_caso exercise5_quick_peor_caso
 
 all : $(EXE)
 

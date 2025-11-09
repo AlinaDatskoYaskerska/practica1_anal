@@ -23,6 +23,7 @@ void peor_merge(int *a, int n, int *aux) {
 
   assert(a != NULL);
   assert(aux != NULL);
+  assert(n >= 0);
 
     if (n <= 1){
         return;
