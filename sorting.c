@@ -145,13 +145,13 @@ int mergesort(int* tabla, int ip, int iu) {
   imedio = (ip + iu)/2;
 
   ob_iz = mergesort(tabla, ip, imedio);
-  assert(ob_iz != ERR);
+	if (ob_iz == ERR) return ERR;
 
   ob_dc = mergesort(tabla, imedio+1, iu);
-  assert(ob_dc != ERR);
+	if (ob_dc == ERR) return ERR;
 
   ob_merge = merge(tabla, ip, iu, imedio);
-  assert(ob_merge != ERR);
+	if (ob_merge == ERR) return ERR;
 
   ob_total = ob_iz + ob_dc + ob_merge;
 
@@ -170,6 +170,7 @@ int merge(int* tabla, int ip, int iu, int imedio) {
   assert(ip >= 0);
   assert(iu >= 0);
   assert(imedio >= 0);
+
 
   aux = malloc((iu-ip+1)*sizeof(aux[0]));
   if (aux == NULL) return ERR;
@@ -237,27 +238,23 @@ int quicksort(int *tabla, int ip, int iu)
 	assert(iu >= 0);
 	assert(ip <= iu);
 
-	if (ip >= iu)
-		return 0;
+	if (ip >= iu) return 0;
 
 	ob_partir = partition(tabla, ip, iu, &pos);
-	if (ob_partir == ERR)
-		return ERR;
+	if (ob_partir == ERR) return ERR;
 	ob_total += ob_partir;
 
 	if (pos - 1 >= ip)
 	{
 		ob_izquierda = quicksort(tabla, ip, pos - 1);
-		if (ob_izquierda == ERR)
-			return ERR;
+		if (ob_izquierda == ERR) return ERR;
 		ob_total += ob_izquierda;
 	}
 
 	if (pos + 1 <= iu)
 	{
 		ob_derecha = quicksort(tabla, pos + 1, iu);
-		if (ob_derecha == ERR)
-			return ERR;
+		if (ob_derecha == ERR) return ERR;
 		ob_total += ob_derecha;
 	}
 
@@ -288,8 +285,7 @@ int partition(int *tabla, int ip, int iu, int *pos)
 	}
 
 	ob_piv = median(tabla, ip, iu, pos);
-	if (ob_piv == ERR)
-		return ERR;
+	if (ob_piv == ERR) return ERR;
 	ob += ob_piv;
 
 	if (*pos != ip)
@@ -353,27 +349,23 @@ int quicksort_avg(int *tabla, int ip, int iu)
 	assert(iu >= 0);
 	assert(ip <= iu);
 
-	if (ip >= iu)
-		return 0;
+	if (ip >= iu) return 0;
 
 	ob_partir = partition_avg(tabla, ip, iu, &pos);
-	if (ob_partir == ERR)
-		return ERR;
+	if (ob_partir == ERR) return ERR;
 	ob_total += ob_partir;
 
 	if (pos - 1 >= ip)
 	{
 		ob_izquierda = quicksort_avg(tabla, ip, pos - 1);
-		if (ob_izquierda == ERR)
-			return ERR;
+		if (ob_izquierda == ERR) return ERR;
 		ob_total += ob_izquierda;
 	}
 
 	if (pos + 1 <= iu)
 	{
 		ob_derecha = quicksort_avg(tabla, pos + 1, iu);
-		if (ob_derecha == ERR)
-			return ERR;
+		if (ob_derecha == ERR) return ERR;
 		ob_total += ob_derecha;
 	}
 
@@ -404,8 +396,7 @@ int partition_avg(int *tabla, int ip, int iu, int *pos)
 	}
 
 	ob_piv = median_avg(tabla, ip, iu, pos);
-	if (ob_piv == ERR)
-		return ERR;
+	if (ob_piv == ERR) return ERR;
 	ob += ob_piv;
 
 	if (*pos != ip)
@@ -470,27 +461,23 @@ int quicksort_stat(int *tabla, int ip, int iu)
 	assert(iu >= 0);
 	assert(ip <= iu);
 
-	if (ip >= iu)
-		return 0;
+	if (ip >= iu) return 0;
 
 	ob_partir = partition_stat(tabla, ip, iu, &pos);
-	if (ob_partir == ERR)
-		return ERR;
+	if (ob_partir == ERR) return ERR;
 	ob_total += ob_partir;
 
 	if (pos - 1 >= ip)
 	{
 		ob_izquierda = quicksort_stat(tabla, ip, pos - 1);
-		if (ob_izquierda == ERR)
-			return ERR;
+		if (ob_izquierda == ERR) return ERR;
 		ob_total += ob_izquierda;
 	}
 
 	if (pos + 1 <= iu)
 	{
 		ob_derecha = quicksort_stat(tabla, pos + 1, iu);
-		if (ob_derecha == ERR)
-			return ERR;
+		if (ob_derecha == ERR) return ERR;
 		ob_total += ob_derecha;
 	}
 
@@ -521,8 +508,7 @@ int partition_stat(int *tabla, int ip, int iu, int *pos)
 	}
 
 	ob_piv = median_stat(tabla, ip, iu, pos);
-	if (ob_piv == ERR)
-		return ERR;
+	if (ob_piv == ERR) return ERR;
 	ob += ob_piv;
 
 	if (*pos != ip)
