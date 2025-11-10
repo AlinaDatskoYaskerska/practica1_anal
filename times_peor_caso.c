@@ -112,6 +112,15 @@ short average_sorting_time(pfunc_sort metodo,
   start = clock();
 
   temp = metodo(tabla[0], 0, N - 1);
+  if( temp == ERR)
+  {
+    for (i = 0; i < n_perms; i++)
+    {
+      if(tabla[i] != NULL) free(tabla[i]);
+    }
+    free(tabla);
+    return ERR;
+  }
 
   ob = temp;
   min = temp;

@@ -17,7 +17,7 @@
 #include <assert.h>
 #include <time.h>
 
-int build_best(int *a, int l, int r, int *aux, int pos)
+int quick_rec_best(int *a, int l, int r, int *aux, int pos)
 {
   int i, mid, left_start, left_len, first;
 
@@ -33,7 +33,7 @@ int build_best(int *a, int l, int r, int *aux, int pos)
   aux[pos++] = a[mid];
 
   left_start = pos;
-  pos = build_best(a, l, mid - 1, aux, pos);
+  pos = quick_rec_best(a, l, mid - 1, aux, pos);
   left_len = pos - left_start;
 
   if (left_len > 1)
@@ -44,12 +44,12 @@ int build_best(int *a, int l, int r, int *aux, int pos)
     aux[left_start + left_len - 1] = first;
   }
 
-  pos = build_best(a, mid + 1, r, aux, pos);
+  pos = quick_rec_best(a, mid + 1, r, aux, pos);
 
   return pos;
 }
 
-void best_quick_perm(int *a, int n, int *aux)
+void mejor_quick(int *a, int n, int *aux)
 {
   int i = 0;
 
@@ -57,7 +57,7 @@ void best_quick_perm(int *a, int n, int *aux)
   assert(aux != NULL);
   assert(n >= 0);
 
-  build_best(a, 0, n - 1, aux, 0);
+  quick_rec_best(a, 0, n - 1, aux, 0);
   for (i = 0; i < n; i++)
   {
     a[i] = aux[i];
@@ -140,7 +140,7 @@ short average_sorting_time(pfunc_sort metodo,
         tabla[i][j] = j + 1;
       }
 
-      best_quick_perm(tabla[i], N, aux);
+      mejor_quick(tabla[i], N, aux);
     }
 
     free(aux);
@@ -149,6 +149,15 @@ short average_sorting_time(pfunc_sort metodo,
   start = clock();
 
   temp = metodo(tabla[0], 0, N - 1);
+  if( temp == ERR)
+  {
+    for (i = 0; i < n_perms; i++)
+    {
+      if(tabla[i] != NULL) free(tabla[i]);
+    }
+    free(tabla);
+    return ERR;
+  }
 
   ob = temp;
   min = temp;
