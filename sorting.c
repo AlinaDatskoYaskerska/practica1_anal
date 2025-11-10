@@ -296,6 +296,190 @@ int partition(int *tabla, int ip, int iu, int *pos)
 	return ob;
 }
 
+int quicksort_avg(int *tabla, int ip, int iu)
+{
+	int ob_total = 0;
+	int ob_partir = 0, ob_izquierda = 0, ob_derecha = 0;
+	int pos = 0;
+
+	assert(tabla != NULL);
+	assert(ip >= 0);
+	assert(iu >= 0);
+	assert(ip <= iu);
+
+	if (ip >= iu)
+		return 0;
+
+	ob_partir = partition_avg(tabla, ip, iu, &pos);
+	if (ob_partir == ERR)
+		return ERR;
+	ob_total += ob_partir;
+
+	if (pos - 1 >= ip)
+	{
+		ob_izquierda = quicksort_avg(tabla, ip, pos - 1);
+		if (ob_izquierda == ERR)
+			return ERR;
+		ob_total += ob_izquierda;
+	}
+
+	if (pos + 1 <= iu)
+	{
+		ob_derecha = quicksort_avg(tabla, pos + 1, iu);
+		if (ob_derecha == ERR)
+			return ERR;
+		ob_total += ob_derecha;
+	}
+
+	return ob_total;
+}
+
+int partition_avg(int *tabla, int ip, int iu, int *pos)
+{
+	int ob = 0;
+	int ob_piv = 0;
+	int pivot_val, i, j, tmp;
+
+	assert(tabla != NULL);
+	assert(ip >= 0);
+	assert(iu >= 0);
+	assert(ip <= iu);
+	assert(pos != NULL);
+
+	if (ip == iu)
+	{
+		*pos = ip;
+		return 0;
+	}
+
+	ob_piv = median_avg(tabla, ip, iu, pos);
+	if (ob_piv == ERR)
+		return ERR;
+	ob += ob_piv;
+
+	if (*pos != ip)
+	{
+		tmp = tabla[ip];
+		tabla[ip] = tabla[*pos];
+		tabla[*pos] = tmp;
+	}
+
+	pivot_val = tabla[ip];
+	i = ip + 1;
+
+	for (j = ip + 1; j <= iu; j++)
+	{
+		ob++;
+		if (tabla[j] < pivot_val)
+		{
+			tmp = tabla[i];
+			tabla[i] = tabla[j];
+			tabla[j] = tmp;
+			i++;
+		}
+	}
+
+	*pos = i - 1;
+
+	tmp = tabla[ip];
+	tabla[ip] = tabla[*pos];
+	tabla[*pos] = tmp;
+
+	return ob;
+}
+
+int quicksort_stat(int *tabla, int ip, int iu)
+{
+	int ob_total = 0;
+	int ob_partir = 0, ob_izquierda = 0, ob_derecha = 0;
+	int pos = 0;
+
+	assert(tabla != NULL);
+	assert(ip >= 0);
+	assert(iu >= 0);
+	assert(ip <= iu);
+
+	if (ip >= iu)
+		return 0;
+
+	ob_partir = partition_stat(tabla, ip, iu, &pos);
+	if (ob_partir == ERR)
+		return ERR;
+	ob_total += ob_partir;
+
+	if (pos - 1 >= ip)
+	{
+		ob_izquierda = quicksort_stat(tabla, ip, pos - 1);
+		if (ob_izquierda == ERR)
+			return ERR;
+		ob_total += ob_izquierda;
+	}
+
+	if (pos + 1 <= iu)
+	{
+		ob_derecha = quicksort_stat(tabla, pos + 1, iu);
+		if (ob_derecha == ERR)
+			return ERR;
+		ob_total += ob_derecha;
+	}
+
+	return ob_total;
+}
+
+int partition_stat(int *tabla, int ip, int iu, int *pos)
+{
+	int ob = 0;
+	int ob_piv = 0;
+	int pivot_val, i, j, tmp;
+
+	assert(tabla != NULL);
+	assert(ip >= 0);
+	assert(iu >= 0);
+	assert(ip <= iu);
+	assert(pos != NULL);
+
+	if (ip == iu)
+	{
+		*pos = ip;
+		return 0;
+	}
+
+	ob_piv = median_stat(tabla, ip, iu, pos);
+	if (ob_piv == ERR)
+		return ERR;
+	ob += ob_piv;
+
+	if (*pos != ip)
+	{
+		tmp = tabla[ip];
+		tabla[ip] = tabla[*pos];
+		tabla[*pos] = tmp;
+	}
+
+	pivot_val = tabla[ip];
+	i = ip + 1;
+
+	for (j = ip + 1; j <= iu; j++)
+	{
+		ob++;
+		if (tabla[j] < pivot_val)
+		{
+			tmp = tabla[i];
+			tabla[i] = tabla[j];
+			tabla[j] = tmp;
+			i++;
+		}
+	}
+
+	*pos = i - 1;
+
+	tmp = tabla[ip];
+	tabla[ip] = tabla[*pos];
+	tabla[*pos] = tmp;
+
+	return ob;
+}
+
 int median(int *tabla, int ip, int iu, int *pos)
 {
 	assert(tabla != NULL);
@@ -323,30 +507,62 @@ int median_avg(int *tabla, int ip, int iu, int *pos)
 
 int median_stat(int *tabla, int ip, int iu, int *pos)
 {
+	int imedio, comps, a, b, c;
 
-	int imedio = (ip + iu) / 2;
 	assert(tabla != NULL);
 	assert(ip >= 0);
 	assert(iu >= 0);
 	assert(ip <= iu);
 	assert(pos != NULL);
 
+	imedio = (ip + iu) / 2;
+	comps = 0;
 
-	if ((tabla[ip] <= tabla[imedio] && tabla[imedio] <= tabla[iu]) ||
-			(tabla[iu] <= tabla[imedio] && tabla[imedio] <= tabla[ip]))
+	a = tabla[ip];
+	b = tabla[imedio];
+	c = tabla[iu];
+
+	comps++;
+	if (a < b)
 	{
-		*pos = imedio;
-	}
-	else if ((tabla[imedio] <= tabla[ip] && tabla[ip] <= tabla[iu]) ||
-					 (tabla[iu] <= tabla[ip] && tabla[ip] <= tabla[imedio]))
-	{
-		*pos = ip;
+		comps++;
+		if (b < c)
+		{
+			*pos = imedio;
+		}
+		else
+		{
+			comps++;
+			if (a < c)
+			{
+				*pos = iu;
+			}
+			else
+			{
+				*pos = ip;
+			}
+		}
 	}
 	else
 	{
-		*pos = iu;
+		comps++;
+		if (a < c)
+		{
+			*pos = ip;
+		}
+		else
+		{
+			comps++;
+			if (b < c)
+			{
+				*pos = iu;
+			}
+			else
+			{
+				*pos = imedio;
+			}
+		}
 	}
 
-	/*Aqui habria que devolver el numero de OBs*/
-	return 0;
+	return comps;
 }

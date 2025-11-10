@@ -136,8 +136,7 @@ int **generate_permutations(int n_perms, int N)
     {
       for (j = 0; j < i; j++)
       {
-        if (perm[j] != NULL)
-          free(perm[j]);
+        free(perm[j]);
       }
       free(perm);
       return NULL;

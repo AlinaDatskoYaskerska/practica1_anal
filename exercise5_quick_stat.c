@@ -3,8 +3,8 @@
 /* Authors:                                                */
 /*                                                         */
 /* Programa that writes in a file                          */
-/* the best times of the algorithm                         */
-/* of sorting by quick sort                                */
+/* the average times of the algorithm                      */
+/* of sorting by quick sort stat                           */
 /*                                                         */
 /* Input: Command Line                                     */
 /* -num_min: lowest number of table elements               */
@@ -66,7 +66,7 @@ int main(int argc, char** argv)
   }
 
   /* compute times */
-  ret = generate_sorting_times(quicksort, nombre,num_min, num_max,incr, n_perms);
+  ret = generate_sorting_times(quicksort_stat, nombre,num_min, num_max,incr, n_perms);
   if (ret == ERR) { /* ERR_TIME should be a negative number */
     printf("Error in function generate_sorting_times\n");
     exit(-1);

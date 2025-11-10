@@ -3,7 +3,7 @@
 /* Authors:                                                */
 /*                                                         */
 /* Programa that writes in a file                          */
-/* the average times of the algorithm                      */
+/* the worst times of the algorithm                        */
 /* of sorting by insertion                                 */
 /*                                                         */
 /* Input: Command Line                                     */
