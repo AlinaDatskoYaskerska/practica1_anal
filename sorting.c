@@ -83,7 +83,6 @@ int InsertSort(int *array, int ip, int iu)
 /* during the sorting process                      */
 /* or ERR in case of problem                       */
 /***************************************************/
-
 int BubbleSort(int *array, int ip, int iu)
 {
   int i = 0, j = 0;
@@ -116,15 +115,15 @@ int BubbleSort(int *array, int ip, int iu)
 
 
 /***************************************************/
-/* Function: BubbleSort     CAMBIAR                       */
-/* Date: 26-09-2025                                */
+/* Function: MergeSort                             */
+/* Date: 03-10-2025                                */
 /* Authors: Lucas Manuel Blanco Rodríguez          */
 /*                                                 */
 /* Routine that sorts an array of integers         */
-/* using the Bubble Sort algorithm.                */
+/* using the Merge Sort algorithm.                 */
 /*                                                 */
 /* Input:                                          */
-/* int *array: pointer to  array to be sorted      */
+/* int *tabla: pointer to  array to be sorted      */
 /* int ip: index of the first element              */
 /* int iu: index of the last element               */
 /*                                                 */
@@ -159,7 +158,11 @@ int mergesort(int* tabla, int ip, int iu) {
   return ob_total;
 }
 
-
+/*******************************************************************/
+/* Merges the two sorted subarrays [ip, imedio] and [imedio+1, iu] */
+/* into tabla, counting comparisons during the merge,              */
+/* and returns the number of comparisons made.                     */
+/*******************************************************************/
 int merge(int* tabla, int ip, int iu, int imedio) {
   int i = ip, j = imedio+1, k = 0, ob = 0, *aux = NULL;
 
@@ -204,6 +207,25 @@ int merge(int* tabla, int ip, int iu, int imedio) {
   return ob;
 }
 
+/***************************************************/
+/* Function: QuickSort                             */
+/* Date: 03-10-2025                                */
+/* Authors: Lucas Manuel Blanco Rodríguez          */
+/*                                                 */
+/* Routine that sorts an array of integers         */
+/* using the Quick Sort algorithm.                 */
+/* and using the first element as pivot.           */
+/*                                                 */
+/* Input:                                          */
+/* int *tabla: pointer to  array to be sorted      */
+/* int ip: index of the first element              */
+/* int iu: index of the last element               */
+/*                                                 */
+/* Output:                                         */
+/* int: number of OBs made                         */
+/* during the sorting process                      */
+/* or ERR in case of problem                       */
+/***************************************************/
 int quicksort(int *tabla, int ip, int iu)
 {
 	int ob_total = 0;
@@ -242,6 +264,11 @@ int quicksort(int *tabla, int ip, int iu)
 	return ob_total;
 }
 
+/************************************************************************/
+/* Partitions the subarray [ip, iu] using the first element as pivot,		*/
+/* moves smaller elements to the left and larger to the right,					*/
+/* and returns the number of comparisons performed. 										*/
+/************************************************************************/
 int partition(int *tabla, int ip, int iu, int *pos)
 {
 	int ob = 0;
@@ -296,6 +323,25 @@ int partition(int *tabla, int ip, int iu, int *pos)
 	return ob;
 }
 
+/***************************************************/
+/* Function: QuickSort (avg)                       */
+/* Date: 03-10-2025                                */
+/* Authors: Lucas Manuel Blanco Rodríguez          */
+/*                                                 */
+/* Routine that sorts an array of integers         */
+/* using the Quick Sort algorithm.                 */
+/* and using the central element as pivot.         */
+/*                                                 */
+/* Input:                                          */
+/* int *tabla: pointer to  array to be sorted      */
+/* int ip: index of the first element              */
+/* int iu: index of the last element               */
+/*                                                 */
+/* Output:                                         */
+/* int: number of OBs made                         */
+/* during the sorting process                      */
+/* or ERR in case of problem                       */
+/***************************************************/
 int quicksort_avg(int *tabla, int ip, int iu)
 {
 	int ob_total = 0;
@@ -334,6 +380,11 @@ int quicksort_avg(int *tabla, int ip, int iu)
 	return ob_total;
 }
 
+/************************************************************************/
+/* Partitions the subarray [ip, iu] using the central element as pivot,	*/
+/* moves smaller elements to the left and larger to the right,					*/
+/* and returns the number of comparisons performed. 										*/
+/************************************************************************/
 int partition_avg(int *tabla, int ip, int iu, int *pos)
 {
 	int ob = 0;
@@ -388,6 +439,26 @@ int partition_avg(int *tabla, int ip, int iu, int *pos)
 	return ob;
 }
 
+/***************************************************/
+/* Function: QuickSort (stat)                      */
+/* Date: 03-10-2025                                */
+/* Authors: Lucas Manuel Blanco Rodríguez          */
+/*                                                 */
+/* Routine that sorts an array of integers         */
+/* using the Quick Sort algorithm.                 */
+/* and using the median of                         */
+/* first, central and last elements as pivot.      */
+/*                                                 */
+/* Input:                                          */
+/* int *tabla: pointer to  array to be sorted      */
+/* int ip: index of the first element              */
+/* int iu: index of the last element               */
+/*                                                 */
+/* Output:                                         */
+/* int: number of OBs made                         */
+/* during the sorting process                      */
+/* or ERR in case of problem                       */
+/***************************************************/
 int quicksort_stat(int *tabla, int ip, int iu)
 {
 	int ob_total = 0;
@@ -426,6 +497,11 @@ int quicksort_stat(int *tabla, int ip, int iu)
 	return ob_total;
 }
 
+/************************************************************************/
+/* Partitions the subarray [ip, iu] using the median of first, central, */
+/* and last elements as pivot,	moves smaller elements to the left and  */
+/* larger to the righ and returns the number of comparisons performed.  */
+/************************************************************************/
 int partition_stat(int *tabla, int ip, int iu, int *pos)
 {
 	int ob = 0;
@@ -480,6 +556,7 @@ int partition_stat(int *tabla, int ip, int iu, int *pos)
 	return ob;
 }
 
+/*Select the first element as pivot*/
 int median(int *tabla, int ip, int iu, int *pos)
 {
 	assert(tabla != NULL);
@@ -493,6 +570,7 @@ int median(int *tabla, int ip, int iu, int *pos)
 	return 0;
 }
 
+/*Select the central element as pivot*/
 int median_avg(int *tabla, int ip, int iu, int *pos)
 {
 	assert(tabla != NULL);
@@ -505,6 +583,7 @@ int median_avg(int *tabla, int ip, int iu, int *pos)
 	return 0;
 }
 
+/*Select the median of first, central and last elements as pivot*/
 int median_stat(int *tabla, int ip, int iu, int *pos)
 {
 	int imedio, comps, a, b, c;
