@@ -52,11 +52,12 @@ int main(int argc, char** argv)
   ret = quicksort(perm, 0, tamano-1);
 
   if (ret == ERR) {
-    printf("Error: Error in QuickSort\n");
+    printf("Error: Error in MergeSort\n");
     free(perm);
     exit(-1);
   }
 
+  printf("Ordenando empleando QuickSort\n");
   for(j = 0; j < tamano; j++) {
     printf("%d \t", perm[j]);
   }
