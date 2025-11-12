@@ -44,7 +44,7 @@ int main(int argc, char** argv)
     exit(-1);
   }
 
-  printf("Practice number 1, section 5, Merge Sort\n");
+  printf("Practice number 2, section 5, Merge Sort\n");
   printf("Done by: Lucas Blanco y Alina Datsko\n");
   printf("Group: 1201\n");
   

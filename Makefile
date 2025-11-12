@@ -193,7 +193,7 @@ exercise5_test_quick_plot_time:
 
 exercise5_test_merge_plot_ob:
 	@echo Graficando tiempos mejor, peor y medio en OBs del Merge Sort
-	@./exercise5_merge -num_min 1000 -num_max 40000 -incr 500 -numP 100 -outputFile exercise5_merge.log
+	@./exercise5_merge -num_min 1000 -num_max 100000 -incr 500 -numP 100 -outputFile exercise5_merge.log
 	@gnuplot -persist -e "set title 'Comparación de mejor, peor y media OBs (Merge Sort)'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Cantidad de OBs'; \
@@ -250,10 +250,10 @@ exercise5_test_quick_plot_ob_comparacion_medians:
 
 exercise5_test_quick_plot_time_comparacion_medians:
 	@echo Graficando tiempos medios del Quick Sort variando las medianas
-	@./exercise5_quick -num_min 100 -num_max 30000 -incr 100 -numP 120 -outputFile exercise5_quick.log
-	@./exercise5_quick_avg -num_min 100 -num_max 30000 -incr 100 -numP 120 -outputFile exercise5_quick_avg.log
-	@./exercise5_quick_stat -num_min 100 -num_max 30000 -incr 100 -numP 120 -outputFile exercise5_quick_stat.log
-	@gnuplot -persist -e "set title 'Cantidad de OBs del Quick Sort variando las medianas'; \
+	@./exercise5_quick -num_min 100 -num_max 50000 -incr 100 -numP 100 -outputFile exercise5_quick.log
+	@./exercise5_quick_avg -num_min 100 -num_max 50000 -incr 100 -numP 100 -outputFile exercise5_quick_avg.log
+	@./exercise5_quick_stat -num_min 100 -num_max 50000 -incr 100 -numP 100 -outputFile exercise5_quick_stat.log
+	@gnuplot -persist -e "set title 'Tiempo de ejecución del Quick Sort variando las medianas'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo (s)'; \
 		plot 'exercise5_quick.log' u 1:2 w lines title 'Pivote 1er elemento', \
