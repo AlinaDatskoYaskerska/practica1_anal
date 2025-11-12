@@ -416,3 +416,36 @@ correlation matrix of the fit parameters:
 a               1.000 
 b              -0.975  1.000 
 c               0.824 -0.915  1.000 
+
+
+*******************************************************************************
+Tue Nov 11 20:19:11 2025
+
+
+FIT:    data read from 'exercise5_merge.log' using 1:2
+        format = x:z
+        #datapoints = 334
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x*log(x)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 1.3965721630e+14   0.00e+00  6.47e+05    1.000000e+00
+   4 4.1722626848e-02  -2.40e-07  6.47e+01    3.359326e-08
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.0417226
+rel. change during last iteration : -2.39653e-12
+
+degrees of freedom    (FIT_NDF)                        : 333
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0111934
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.000125293
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 3.35933e-08      +/- 9.472e-10    (2.82%)
+
+
+

@@ -175,7 +175,7 @@ exercise5_test_bubble_plot_time:
 
 exercise5_test_quick_plot_ob:
 	@echo Graficando tiempos mejor, peor y medio en OBs del Quick Sort
-	@./exercise5_quick -num_min 100 -num_max 4000 -incr 10 -numP 100 -outputFile exercise5_quick.log
+	@./exercise5_quick -num_min 100 -num_max 100000 -incr 300 -numP 120 -outputFile exercise5_quick.log
 	@gnuplot -persist -e "set title 'Comparación de mejor, peor y media OBs (Quick Sort)'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Cantidad de OBs'; \
@@ -185,7 +185,7 @@ exercise5_test_quick_plot_ob:
 
 exercise5_test_quick_plot_time:
 	@echo Graficando tiempo de ejecución del Quick Sort
-	@./exercise5_quick -num_min 500 -num_max 100000 -incr 300 -numP 150 -outputFile exercise5_quick.log
+	@./exercise5_quick -num_min 00 -num_max 100000 -incr 300 -numP 150 -outputFile exercise5_quick.log
 	@gnuplot -persist -e "set title 'Tiempo de ejecución del Quick Sort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo de ejecución (s)'; \
@@ -203,7 +203,7 @@ exercise5_test_merge_plot_ob:
 
 exercise5_test_merge_plot_time:
 	@echo Graficando tiempo de ejecución del Merge Sort
-	@./exercise5_merge -num_min 100 -num_max 4000 -incr 10 -numP 100 -outputFile exercise5_merge.log
+	@./exercise5_merge -num_min 100 -num_max 100000 -incr 300 -numP 100 -outputFile exercise5_merge.log
 	@gnuplot -persist -e "set title 'Tiempo de ejecución del Merge Sort'; \
 		set xlabel 'Tamaño de N'; \
 		set ylabel 'Tiempo de ejecución (s)'; \
@@ -402,6 +402,47 @@ exercise5_test_bubble_plot_fit_ob:
 		plot 'exercise5_bubble.log' using 1:3 with lines title 'Datos experimentales', \
 		     f(x) with lines title sprintf('Ajuste cuadrático: y = %.2e*x^2 + %.2e*x + %.2e', a, b, c)"
 
+exercise5_test_merge_plot_fit_time:
+	@echo "Graficando tiempo de ejecución del Merge Sort y ajustando a a·x·log(x)"
+	@./exercise5_merge -num_min 100 -num_max 100000 -incr 300 -numP 100 -outputFile exercise5_merge.log
+	@gnuplot -persist -e "set title 'Ajuste a·x·log(x) del tiempo de ejecución (Merge Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo (s)'; \
+		f(x) = a*x*log(x); \
+		fit f(x) 'exercise5_merge.log' using 1:2 via a; \
+		plot 'exercise5_merge.log' using 1:2 with lines title 'Datos experimentales', \
+		     f(x) with lines title sprintf('Ajuste: y = %.2e·x·log(x)', a)"
+exercise5_test_merge_plot_fit_ob:
+	@echo "Graficando y ajustando la media de OBs del Merge Sort a a·x·log(x)"
+	@./exercise5_merge -num_min 100 -num_max 100000 -incr 300 -numP 100 -outputFile exercise5_merge.log
+	@gnuplot -persist -e "set title 'Ajuste a·x·log(x) de la media de OBs (Merge Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Operaciones básicas (media)'; \
+		f(x) = a*x*log(x); \
+		fit f(x) 'exercise5_merge.log' using 1:3 via a; \
+		plot 'exercise5_merge.log' using 1:3 with lines title 'Datos experimentales', \
+		     f(x) with lines title sprintf('Ajuste: y = %.2e·x·log(x)', a)"
+
+exercise5_test_quick_plot_fit_time:
+	@echo "Graficando tiempo de ejecución del Quick Sort y ajustando a a·x·log(x)"
+	@./exercise5_quick -num_min 100 -num_max 100000 -incr 300 -numP 100 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Ajuste a·x·log(x) del tiempo de ejecución (Quick Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Tiempo (s)'; \
+		f(x) = a*x*log(x); \
+		fit f(x) 'exercise5_quick.log' using 1:2 via a; \
+		plot 'exercise5_quick.log' using 1:2 with lines title 'Datos experimentales', \
+		     f(x) with lines title sprintf('Ajuste: y = %.2e·x·log(x)', a)"
+exercise5_test_quick_plot_fit_ob:
+	@echo "Graficando y ajustando la media de OBs del Quick Sort a a·x·log(x)"
+	@./exercise5_quick -num_min 100 -num_max 100000 -incr 300 -numP 100 -outputFile exercise5_quick.log
+	@gnuplot -persist -e "set title 'Ajuste a·x·log(x) de la media de OBs (Quick Sort)'; \
+		set xlabel 'Tamaño de N'; \
+		set ylabel 'Operaciones básicas (media)'; \
+		f(x) = a*x*log(x); \
+		fit f(x) 'exercise5_quick.log' using 1:3 via a; \
+		plot 'exercise5_quick.log' using 1:3 with lines title 'Datos experimentales', \
+		     f(x) with lines title sprintf('Ajuste: y = %.2e·x·log(x)', a)"
 #----------------------- Run with Valgrind -----------------------#
 runv:
 	@echo ">>>>>> Running exercise1 with Valgrind (modo estricto)"
