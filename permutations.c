@@ -146,39 +146,6 @@ int **generate_permutations(int n_perms, int N)
   return perm;
 }
 
-INSERT INTO flights(flight_id,flight_no,scheduled_departure,scheduled_arrival,
-                    departure_airport,arrival_airport,aircraft_code,status)
-VALUES(999999,'SU9991','2025-11-11 08:00:00','2025-11-11 10:00:00','SVO','DME','773','Scheduled');
-
-INSERT INTO flights(flight_id, flight_no, scheduled_departure, 
-                    scheduled_arrival,departure_airport, arrival_airport, 
-                    aircraft_code, status) 
-VALUES(999998, 'SU9992', '2025-11-11 09:00:00', '2025-11-12 12:00:00', 'SVO',
-       'DME', '773', 'Scheduled');
-
-
-INSERT INTO flights ( flight_id, flight_no, scheduled_departure, 
-                      scheduled_arrival, departure_airport, arrival_airport, 
-                      aircraft_code, status ) 
-VALUES ( 100003, 'SU2001', '2025-11-11 06:00:00', '2025-11-11 07:30:00', 'SVO', 
-        'LED', '773', 'Scheduled' );
-
-INSERT INTO flights ( flight_id, flight_no, scheduled_departure, 
-                      scheduled_arrival, departure_airport, arrival_airport, 
-                      aircraft_code, status ) 
-VALUES ( 100004, 'SU2002', '2025-11-11 09:00:00', '2025-11-11 11:00:00', 'LED', 
-        'DME', '773', 'Scheduled' );
-
-INSERT INTO flights ( flight_id, flight_no, scheduled_departure, 
-                      scheduled_arrival, departure_airport, arrival_airport, 
-                      aircraft_code, status ) 
-VALUES ( 100005, 'SU3001', '2025-11-09 08:00:00', '2025-11-09 10:00:00', 'SVO', 'LED', '773', 'Scheduled' );
-
-INSERT INTO flights ( flight_id, flight_no, scheduled_departure,
-                      scheduled_arrival, departure_airport, arrival_airport,
-                      aircraft_code, status ) 
-VALUES ( 100006, 'SU3002', '2025-11-10 12:00:00', '2025-11-10 14:00:00', 'LED', 'DME', '773', 'Scheduled' );
-
 
 
 
